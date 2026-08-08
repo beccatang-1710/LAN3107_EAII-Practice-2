@@ -648,6 +648,97 @@
         .section:nth-child(3) { animation-delay: 0.3s; }
         .section:nth-child(4) { animation-delay: 0.4s; }
         .section:nth-child(5) { animation-delay: 0.5s; }
+
+        /* ---- Task overview (EAII Practice 2 tab) ---- */
+        .task-section { margin-bottom: 28px; }
+        .task-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--earth);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .task-section p { color: var(--text); font-size: 15px; line-height: 1.7; }
+        .task-section ul, .task-section ol { padding-left: 22px; margin: 10px 0; }
+        .task-section li { margin-bottom: 8px; line-height: 1.6; }
+
+        .task-box {
+            background: var(--sage-pale);
+            border-left: 4px solid var(--sage);
+            padding: 14px 18px;
+            margin: 12px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .task-box p { margin-bottom: 4px; }
+
+        .meeting-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: var(--sage-pale);
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--sage-light);
+            margin: 12px 0;
+            color: var(--earth);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .task-note {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .cn-toggle-wrap { text-align: right; margin-bottom: 12px; }
+        .cn-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--earth);
+            user-select: none;
+        }
+        .cn-toggle input {
+            width: 40px;
+            height: 22px;
+            appearance: none;
+            background: var(--sage-light);
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .cn-toggle input::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+        }
+        .cn-toggle input:checked { background: var(--sage); }
+        .cn-toggle input:checked::before { transform: translateX(18px); }
+
+        .cn-translation {
+            display: none;
+            margin-top: 6px;
+            padding: 8px 12px;
+            background: #fdf6e9;
+            border-left: 3px solid var(--earth-light);
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            color: #8b5a2b;
+            line-height: 1.6;
+        }
+        .cn-active .cn-translation { display: block; }
     </style>
 </head>
 <body>
@@ -1061,7 +1152,66 @@
 </div>
 
     <div class="tab-content" id="tab-reference">
-        <img src="Practice 2.png" alt="EAII Practice 2">
+        <div class="cn-toggle-wrap">
+            <label class="cn-toggle">
+                <input type="checkbox" onchange="toggleAllCN(this.checked)">
+                <span>中文翻译</span>
+            </label>
+        </div>
+
+        <div class="task-section">
+            <h2 data-cn="任务">Task</h2>
+            <p data-cn="你是「地球行动」（Earthwise Action）公共關係團隊的一員，這是一個致力保護環境的非牟利組織。該組織將舉辦一個工作坊，教導公眾認識綠色生活。你和你的同事將舉行會議，討論工作坊的安排。你應該：">You are on the public relations team of <strong>Earthwise Action</strong>, a non-profit organisation working to protect the environment. The organisation is going to host a workshop to educate the public about green living. You and your colleagues are going to hold a meeting to discuss the arrangements for the workshop. You should:</p>
+            <ul>
+                <li data-cn="就議程項目提出你自己的建議">give your own suggestion(s) on the agenda items</li>
+                <li data-cn="解釋你建議的理由">explain the reason(s) for your suggestion(s)</li>
+                <li data-cn="積極聆聽，並透過表達喜好、同意或不同意來回應他人的建議">listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
+                <li data-cn="就議程第2至4項達成共識">reach a consensus on agenda items 2–4</li>
+            </ul>
+            <p data-cn="作為一個小組，你們必須涵蓋以下所有議程項目。">As a group, you must cover all the agenda items below.</p>
+        </div>
+
+        <div class="task-section">
+            <h2 data-cn="會議詳情">Meeting Details</h2>
+            <div class="meeting-meta">
+                <span>Earthwise Action</span>
+                <span>Public Relations Team</span>
+                <span>16 October 20-- at 2:30 p.m. in the Meeting Room</span>
+            </div>
+        </div>
+
+        <div class="task-section">
+            <h2 data-cn="議程">Agenda</h2>
+            <ol style="padding-left:22px;">
+                <li data-cn="會議開始">Opening the meeting</li>
+                <li data-cn="推廣工作坊的宣傳策略">Promotional strategies for promoting the workshop</li>
+                <li>
+                    <span data-cn="工作坊中涵蓋的綠色生活貼士">Green living tips to cover in the workshop</span>
+                    <div class="task-box">
+                        <p><strong>Possible practices to cover:</strong></p>
+                        <ul>
+                            <li data-cn="減少能源消耗">Minimise energy consumption</li>
+                            <li data-cn="減少紙張使用">Reduce paper usage</li>
+                            <li data-cn="使用公共交通工具">Use public transport</li>
+                            <li data-cn="節約用水">Conserve water</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span data-cn="其他事項">AOB</span>
+                    <div class="task-box">
+                        <p><strong>Souvenirs for participants</strong></p>
+                        <p class="task-note" data-cn="此議程項目將於評核地點的EAII時段公佈。">This agenda item will be revealed at the assessment venue in the EAII.</p>
+                        <p><strong>Possible souvenirs:</strong></p>
+                        <ul>
+                            <li data-cn="回收再造的手挽袋">Recycled tote bags</li>
+                            <li data-cn="可重用食物保鮮布">Reusable food wraps</li>
+                        </ul>
+                    </div>
+                </li>
+                <li data-cn="會議結束">Closing the meeting</li>
+            </ol>
+        </div>
     </div>
 
 
@@ -1291,6 +1441,23 @@
         body.classList.toggle('collapsed');
         toggle.classList.toggle('rotated');
     }
+
+    function toggleAllCN(show) {
+        document.getElementById('tab-reference').classList.toggle('cn-active', show);
+    }
+
+    function initTranslations() {
+        document.querySelectorAll('#tab-reference [data-cn]').forEach(el => {
+            if (el.dataset.cnProcessed) return;
+            el.dataset.cnProcessed = '1';
+            const trans = document.createElement('div');
+            trans.className = 'cn-translation';
+            trans.textContent = el.dataset.cn;
+            el.after(trans);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initTranslations);
 </script>
 </body>
 </html>
