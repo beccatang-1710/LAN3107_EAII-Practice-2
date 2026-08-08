@@ -782,10 +782,6 @@
 
 <div class="page-wrapper">
 
-    <div class="banner">
-        <img src="banner.png" alt="Banner">
-    </div>
-
     <div class="tab-bar">
         <button class="tab-btn active" onclick="switchTab('task', this)">📄 EAII Practice 2</button>
         <button class="tab-btn" onclick="switchTab('response', this)">📝 Possible Response</button>
@@ -793,6 +789,10 @@
     </div>
 
     <div class="tab-content" id="tab-response">
+
+    <div class="banner">
+        <img src="banner.png" alt="Banner">
+    </div>
 
     <div class="cn-toggle-wrap">
         <label class="cn-toggle">
@@ -1201,6 +1201,10 @@
 </div>
 
     <div class="tab-content active" id="tab-task">
+        <div class="banner">
+            <img src="banner.png" alt="Banner">
+        </div>
+
         <div class="cn-toggle-wrap">
             <label class="cn-toggle">
                 <input type="checkbox" onchange="toggleAllCN(this.checked)">
