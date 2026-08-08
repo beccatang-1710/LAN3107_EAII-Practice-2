@@ -753,7 +753,18 @@
             display: block;
         }
 
-        /* Video placeholder tab */
+        /* Video tab */
+        .video-wrap {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .video-wrap video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         .video-placeholder {
             background: var(--white);
             border-radius: 16px;
@@ -1253,11 +1264,13 @@
     </div>
 
     <div class="tab-content" id="tab-video">
-        <div class="video-placeholder">
-            <div class="vp-icon">🎬</div>
-            <div class="vp-title">Video Coming Soon</div>
-            <p>A sample meeting video for EAII Practice 2 will be available here.</p>
+        <div class="video-wrap">
+            <video controls playsinline preload="metadata">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+        <p style="color:var(--text-muted); font-size:14px; margin-top:12px; text-align:center;">Sample meeting video — EAII Practice 2: Earthwise Action workshop planning.</p>
     </div>
 
 
