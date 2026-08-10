@@ -834,6 +834,61 @@
 
         .dialogue-table .script-text { font-size: 15px; }
         .dialogue-table .c-script .cn-translation { font-size: 13px; }
+
+        /* ---- Supplementary: language features & communicative functions ---- */
+        .supp-notes { margin-top: 6px; }
+        .supp-notes code {
+            background: var(--sage-pale);
+            border: 1px solid var(--sage-light);
+            border-radius: 6px;
+            padding: 1px 6px;
+            font-size: 13px;
+            color: var(--earth);
+        }
+        .supp-notes .cross { color: #c0392b; font-weight: 700; }
+        .supp-notes .tick { color: #1a7a3d; font-weight: 700; }
+        .cf-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 6px;
+        }
+        @media (max-width: 640px) { .cf-grid { grid-template-columns: 1fr; } }
+        .cf-card {
+            background: var(--white);
+            border: 1px solid var(--divider);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .cf-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: var(--earth);
+            margin-bottom: 8px;
+        }
+        .cf-card .tag {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        .cf-card ul { padding-left: 18px; margin: 0; }
+        .cf-card li { margin-bottom: 6px; line-height: 1.55; font-size: 14px; }
+        .cf-card p { font-size: 14px; line-height: 1.6; }
+        .cf-wide { grid-column: 1 / -1; }
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; font-size: 14px; }
+        @media (max-width: 640px) { .modal-grid { grid-template-columns: 1fr; } }
+        .cf-note { margin-top: 8px; font-size: 13px; color: var(--text-muted); font-style: italic; }
+        .form-row { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.55; }
+        .hi-bad {
+            background: #ffedd5; color: #9a3412; text-decoration: line-through;
+            border-bottom: 2px solid #f97316; border-radius: 3px; padding: 0 3px;
+        }
+        .hi-good {
+            background: #dcfce7; color: #166534;
+            border-bottom: 2px solid #22c55e; border-radius: 3px; padding: 0 3px;
+        }
     </style>
 </head>
 <body>
@@ -908,6 +963,79 @@
     </div>
     <p style="color:var(--text-muted); margin:0 0 14px;" data-cn="將鼠標移到對話中任何高亮項目上，即可查看其解釋。">Hover over any <mark class="lang-hl m">highlighted item</mark> in the script to see its explanation.</p>
     <div id="dialogueBody"></div>
+
+    <!-- Supplementary notes: language features & communicative functions -->
+    <div class="supp-notes">
+
+        <div class="task-section">
+            <h2>Language Features</h2>
+            <p>Coloured tags in the conversation show <strong>explanations of the use of language</strong> (modal verbs + bare infinitive, cohesive devices, contractions, suggestion patterns, etc.). A <span class="cross">✗</span> marks the <em>incorrect</em> form (e.g. <code>can + bought</code>), which should be the bare infinitive (e.g. <code>can buy</code>).</p>
+        </div>
+
+        <div class="task-section">
+            <h2>Communicative Functions</h2>
+
+            <div class="cf-grid">
+                <div class="cf-card">
+                    <h3>Cohesive devices / Linking words</h3>
+                    <ul>
+                        <li>Besides / Moreover / Furthermore <span class="tag">(dated)</span></li>
+                        <li>In addition / Additionally</li>
+                        <li>Therefore / Thus / Hence / So</li>
+                    </ul>
+                </div>
+
+                <div class="cf-card">
+                    <h3>Contractions</h3>
+                    <ul>
+                        <li>I'm (I am) / It'll (It will)</li>
+                        <li>We've (We have) / Let's (Let us)</li>
+                        <li>That's (That is)</li>
+                    </ul>
+                </div>
+
+                <div class="cf-card">
+                    <h3>Thinking words (air fillers)</h3>
+                    <p>Well… &nbsp;Ummm… &nbsp;uhhhh…</p>
+                </div>
+
+                <div class="cf-card cf-wide">
+                    <h3>Modal verbs</h3>
+                    <div class="modal-grid">
+                        <div><strong>Ability:</strong> can, could</div>
+                        <div><strong>Possibility:</strong> may, might</div>
+                        <div><strong>Permission:</strong> Can, May</div>
+                        <div><strong>Obligation:</strong> must, have to</div>
+                        <div><strong>Prohibition:</strong> Can't, Mustn't</div>
+                        <div><strong>Offers:</strong> Will, Would</div>
+                        <div><strong>Suggestions:</strong> Shall, Should</div>
+                        <div><strong>Requests:</strong> Could, Would</div>
+                        <div><strong>Future Possibility:</strong> Will, Shall</div>
+                        <div><strong>Past Probability:</strong> Could have, Would have</div>
+                    </div>
+                    <p class="cf-note">+ action verb (bare infinitive) + object (noun clause), e.g. <em>They can effectively attract younger audiences.</em></p>
+                </div>
+
+                <div class="cf-card cf-wide">
+                    <h3>Making suggestions <span class="tag">(action verbs: suggest + advise + recommend)</span></h3>
+                    <div class="form-row">
+                        <div><span class="cross">✗</span> I suggest / advise / recommend <span class="hi-bad">to print</span> our workshop logo.</div>
+                        <div><span class="tick">✓</span> I suggest / advise / recommend <span class="hi-good">printing</span> our workshop logo.</div>
+                        <div><span class="tick">✓</span> I suggest / advise / recommend <span class="hi-good">that you (should — British style) print</span> our workshop logo.</div>
+                        <div><span class="cross">✗</span> How about <span class="hi-bad">print out</span> workshop logo? &nbsp;&nbsp; <span class="tick">✓</span> How about <span class="hi-good">printing</span> our workshop logo?</div>
+                    </div>
+                </div>
+
+                <div class="cf-card cf-wide">
+                    <h3>Sentence structures</h3>
+                    <ul>
+                        <li><strong>Cause &amp; effect:</strong> <em>Since / Because / As</em> + S + V + O, S + V + O.</li>
+                        <li><em>But / However</em> + S + V + O.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="summary-card">
         <h3>Meeting Outcomes</h3>
