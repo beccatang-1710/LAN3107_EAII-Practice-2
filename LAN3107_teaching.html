@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAN3107 Useful Expressions for CA Assignment</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fdf7e0;
+  color: #333;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='190'%3E%3Cpath d='M80 20 L74 32 L68 32 L66 75 L70 87 L77 92 L77 102 L83 102 L83 92 L90 87 L94 75 L92 32 L86 32 Z' fill='none' stroke='%23C4956A' stroke-width='1.3' opacity='0.5'/%3E%3Cpath d='M77 102 L83 102 L83 108 L77 108 Z' fill='%23C4956A' opacity='0.3'/%3E%3Cline x1='80' y1='108' x2='80' y2='118' stroke='%23C4956A' stroke-width='1.8' opacity='0.4'/%3E%3Cline x1='70' y1='118' x2='90' y2='118' stroke='%23C4956A' stroke-width='1.8' opacity='0.4'/%3E%3Ccircle cx='80' cy='25' r='2.5' fill='%23C4956A' opacity='0.3'/%3E%3C/svg%3E") repeat;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 10% 85%, rgba(247,231,206,0.4) 3px, transparent 4px),
+    radial-gradient(circle at 25% 70%, rgba(247,231,206,0.3) 5px, transparent 6px),
+    radial-gradient(circle at 45% 90%, rgba(247,231,206,0.35) 4px, transparent 5px),
+    radial-gradient(circle at 65% 60%, rgba(247,231,206,0.25) 7px, transparent 8px),
+    radial-gradient(circle at 80% 80%, rgba(247,231,206,0.35) 3px, transparent 4px),
+    radial-gradient(circle at 90% 50%, rgba(247,231,206,0.3) 6px, transparent 7px),
+    radial-gradient(circle at 15% 40%, rgba(247,231,206,0.25) 4px, transparent 5px),
+    radial-gradient(circle at 50% 30%, rgba(247,231,206,0.2) 8px, transparent 9px),
+    radial-gradient(circle at 35% 15%, rgba(247,231,206,0.25) 5px, transparent 6px),
+    radial-gradient(circle at 60% 5%, rgba(247,231,206,0.2) 4px, transparent 5px),
+    radial-gradient(circle at 5% 55%, rgba(247,231,206,0.25) 6px, transparent 7px),
+    radial-gradient(circle at 95% 35%, rgba(247,231,206,0.3) 4px, transparent 7px),
+    radial-gradient(circle at 40% 55%, rgba(247,231,206,0.15) 10px, transparent 11px),
+    radial-gradient(circle at 70% 75%, rgba(247,231,206,0.2) 5px, transparent 6px),
+    radial-gradient(circle at 20% 25%, rgba(247,231,206,0.15) 7px, transparent 8px);
+  animation: bubbles 18s ease-in-out infinite alternate;
+}
+
+@keyframes bubbles {
+  0% { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(-35px); opacity: 1; }
+}
+
+.banner {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: kenburns 10s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes kenburns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+
+.page-header {
+  text-align: center;
+  padding: 20px 20px 0;
+  background: white;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header .header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  color: #4b0082;
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6a0dad;
+  margin-bottom: 4px;
+}
+
+.page-header .presented-by {
+  font-size: 14px;
+  color: #9370db;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: #d8bfd8;
+  color: #555;
+  border-radius: 10px 10px 0 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+  background: #c9aec9;
+}
+
+.tab-btn.active {
+  background: white;
+  color: #6a0dad;
+}
+
+.tab-content {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 0 10px 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  line-height: 1.7;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+h1 {
+  font-size: 22px;
+  color: #4b0082;
+  margin-bottom: 6px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #6a0dad;
+  margin: 20px 0 10px;
+}
+
+h3 {
+  font-size: 16px;
+  color: #8a2be2;
+  margin: 16px 0 8px;
+}
+
+.part-badge {
+  display: inline-block;
+  background: #4b0082;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+}
+
+.task-section {
+  margin-bottom: 30px;
+}
+
+.task-section ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.task-section li {
+  margin-bottom: 6px;
+}
+
+.task-box {
+  background: #f8f0ff;
+  border-left: 4px solid #9370db;
+  padding: 16px 20px;
+  margin: 12px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.task-box p { margin-bottom: 4px; }
+
+.expr-text {
+  background: #faf5ff;
+  border: 1px solid #e6d8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 10px 0;
+}
+
+.expr-text .speaker {
+  font-weight: 700;
+  color: #4b0082;
+  margin-right: 6px;
+}
+
+.word {
+  cursor: pointer;
+  border-bottom: 1px dotted rgba(147,112,219,0.3);
+  transition: background 0.15s, border-color 0.15s;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.word:hover {
+  background: rgba(147,112,219,0.12);
+  border-bottom-color: rgba(147,112,219,0.7);
+}
+
+.word.speaking {
+  background: rgba(147,112,219,0.2);
+  border-bottom-color: #9370db;
+  border-bottom-style: solid;
+}
+
+table.words {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+table.words th {
+  background: #9370db;
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+  width: 50%;
+}
+
+table.words td {
+  padding: 10px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid #e6d8f0;
+}
+
+table.words tr:nth-child(even) td {
+  background: #faf5ff;
+}
+
+table.words td:first-child {
+  border-right: 1px solid #e6d8f0;
+}
+
+table.words td:last-child {
+  color: #555;
+}
+
+table.words.stacked th {
+  width: auto;
+}
+
+table.words.stacked tr:nth-child(odd) td {
+  background: #faf5ff;
+}
+
+table.words.stacked tr:nth-child(even) td {
+  background: white;
+}
+
+table.words.stacked td:first-child {
+  border-right: none;
+}
+
+table.words.stacked td {
+  color: #333;
+}
+
+table.words.tenses th {
+  width: auto;
+}
+
+table.words.tenses td {
+  color: #333;
+}
+
+table.words.tenses.flow td {
+  text-align: center;
+  border: 1px solid #e6d8f0;
+}
+
+table.words.tenses.flow td:first-child {
+  border-right: 1px solid #e6d8f0;
+}
+
+table.words.tenses.flow td.flow-arrow {
+  width: 40px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: #9370db;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+
+table.words.tenses.flow td:last-child {
+  color: #333;
+}
+
+.flow-stage {
+  font-weight: 700;
+  color: #4b0082;
+  margin-bottom: 6px;
+}
+
+.flow-step {
+  font-size: 14px;
+  color: #333;
+}
+
+.char-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #faf5ff;
+  border: 1px solid #e6d8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+table.reminder-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+table.reminder-table td {
+  padding: 12px 14px;
+  border: 1px solid #e6d8f0;
+  background: #faf5ff;
+}
+
+.reminder-item {
+  display: block;
+}
+
+.reminder-title {
+  font-size: 15px;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.char-card img {
+  width: 120px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.char-card .char-caption {
+  font-weight: 700;
+  color: #4b0082;
+  font-size: 15px;
+}
+
+.cn-translation {
+  display: none;
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #fff8f0;
+  border-left: 3px solid #e8a87c;
+  border-radius: 0 6px 6px 0;
+  font-size: 14px;
+  color: #8b5a2b;
+  line-height: 1.6;
+}
+
+.cn-word {
+  white-space: nowrap;
+  cursor: pointer;
+  border-bottom: 1px dotted rgba(147,112,219,0.4);
+  transition: background 0.15s;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+.cn-word:hover {
+  background: rgba(147,112,219,0.12);
+}
+
+.cn-word.speaking {
+  background: rgba(147,112,219,0.2);
+  border-bottom-style: solid;
+}
+
+.cn-inline {
+  display: none;
+  font-size: 13px;
+  color: #8b5a2b;
+  font-weight: 400;
+}
+
+.cn-active .cn-inline {
+  display: inline;
+}
+
+.cn-active .cn-translation {
+  display: block;
+}
+
+.cn-toggle-wrap {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.cn-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6a0dad;
+  user-select: none;
+}
+
+.cn-toggle input {
+  width: 40px;
+  height: 22px;
+  appearance: none;
+  background: #d8bfd8;
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.cn-toggle input::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.cn-toggle input:checked {
+  background: #9370db;
+}
+
+.cn-toggle input:checked::before {
+  transform: translateX(18px);
+}
+
+.hint {
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.btn-icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #9370db;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  vertical-align: middle;
+}
+
+.btn-icon:hover {
+  background: #7b5ec0;
+}
+
+.btn-icon.playing {
+  background: #e74c3c;
+}
+
+.btn-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.utterance {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.utterance.block {
+  display: flex;
+  align-items: flex-start;
+}
+
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  background: #f8f0ff;
+  border-radius: 8px;
+  border: 1px solid #e6d8f0;
+  flex-wrap: wrap;
+}
+
+.controls-bar label {
+  font-weight: 600;
+  color: #6a0dad;
+  font-size: 14px;
+}
+
+.controls-bar input[type="range"] {
+  flex: 1;
+  max-width: 160px;
+  accent-color: #9370db;
+}
+
+.controls-bar .speed-val {
+  font-weight: 700;
+  color: #4b0082;
+  min-width: 40px;
+  font-size: 14px;
+}
+
+.ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #9370db;
+  color: white;
+  transition: background 0.15s;
+}
+
+.ctrl-btn:hover {
+  background: #7b5ec0;
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ctrl-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.separator {
+  width: 1px;
+  height: 28px;
+  background: #d8bfd8;
+  margin: 0 4px;
+}
+
+.blank {
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 1px solid #9370db;
+  padding: 0 4px;
+  cursor: text;
+  outline: none;
+  color: #333;
+}
+
+.blank:empty::before {
+  content: attr(data-ph);
+  color: #bbb;
+}
+
+.script-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.script-table th {
+  background: #4b0082;
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.script-table td {
+  padding: 12px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid #e6d8f0;
+}
+
+.script-table tr:nth-child(even) td {
+  background: #faf5ff;
+}
+
+.script-table td:first-child {
+  border-right: 1px solid #e6d8f0;
+}
+
+.script-line {
+  line-height: 1.8;
+}
+
+.script-speaker {
+  font-weight: 700;
+  color: #4b0082;
+  margin-right: 6px;
+}
+
+.fill {
+  display: inline-block;
+  min-width: 60px;
+  border-bottom: 1px dashed #b389e0;
+  background: rgba(147,112,219,0.08);
+  color: #8a5a9e;
+  padding: 0 4px;
+  border-radius: 3px;
+  outline: none;
+  cursor: text;
+  vertical-align: baseline;
+  transition: background 0.15s;
+}
+
+.fill:hover {
+  background: rgba(147,112,219,0.18);
+}
+
+.fill:focus {
+  background: #fff8f0;
+  border-bottom-style: solid;
+  color: #4b0082;
+}
+
+.export-bar {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 4px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .tab-btn { padding: 10px 12px; font-size: 13px; }
+  .char-card { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <img src="banner.png" alt="CA Characters">
+</div>
+
+<div class="page-header">
+  <div class="header-row">
+    <div>
+      <h1>Essential Workplace Communication: Effective Oral Interaction (LAN3107)</h1>
+    </div>
+  </div>
+  <p class="presented-by">Presented by Rebecca Tang</p>
+  <div class="cn-toggle-wrap">
+    <label class="cn-toggle">
+      <input type="checkbox" onchange="toggleAllCN(this.checked)">
+      <span>中文翻译</span>
+    </label>
+  </div>
+</div>
+
+<div class="container">
+  <div class="controls-bar">
+      <label>Speed:</label>
+      <input type="range" id="speedSlider" min="0.25" max="2.0" step="0.25" value="1.0">
+      <span class="speed-val" id="speedDisplay">1.0x</span>
+      <div class="separator"></div>
+      <label>Voice:</label>
+      <select id="voiceSelect" style="padding:5px 10px; border-radius:6px; border:1px solid #9370db; background:white; color:#4b0082; font-weight:600;">
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+      </select>
+      <div class="separator"></div>
+      <button class="ctrl-btn" id="playAllBtn" onclick="playAll()"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg> Play All</button>
+      <button class="ctrl-btn" id="pauseAllBtn" onclick="pauseAll()" disabled><svg viewBox="0 0 24 24"><rect x="5" y="4" width="5" height="16"/><rect x="14" y="4" width="5" height="16"/></svg> Pause</button>
+      <button class="ctrl-btn" id="stopAllBtn" onclick="stopAll()" disabled><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14"/></svg> Stop</button>
+    </div>
+
+<div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(0)">Lesson 2 — Making Small Talk: Hobbies</button>
+    <button class="tab-btn" onclick="switchTab(1)">Lesson 2 Activity — Describing a Hobby</button>
+    <button class="tab-btn" onclick="switchTab(2)">Lesson 3 — Work Projects</button>
+    <button class="tab-btn" onclick="switchTab(3)">Lesson 4 — Opinions on Policy</button>
+  </div>
+
+  <!-- ================= Lesson 2: Making Small Talk — Hobbies & Leisure Activities ================= -->
+  <div class="tab-content active" id="tab-0">
+    <span class="part-badge">Lesson 2</span>
+    <h1 data-cn="閒聊：興趣與消遣活動">Making Small Talk — Hobbies & Leisure Activities</h1>
+
+    <div class="char-card">
+      <div>
+        <div class="char-caption" data-cn="學習如何開啟關於興趣和消遣活動的對話">Learn how to start conversations about hobbies and leisure activities</div>
+        <p style="color:#555;" data-cn="用於閒聊興趣、消遣和空閒活動的實用表達方式。">Useful expressions for casual small talk about hobbies, pastimes, and free time activities.</p>
+      </div>
+    </div>
+
+    <h2 data-cn="1. 開啟輕鬆對話（休閒破冰話題）">1. Starting a Casual Conversation (Icebreakers for Leisure)</h2>
+    <div class="task-section">
+      <div class="task-box">
+        <p><strong data-cn="通用開場白：">The Universal Starter:</strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('How was your weekend? Did you get up to anything fun?', this)"></button><span class="spoken" data-cn="你週末過得怎麼樣？有做什麼有趣的事嗎？">"How was your weekend? Did you get up to anything fun?"</span></span></p>
+
+        <p><strong data-cn="進度／練習：">Progress / Practice:</strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('How is your hobby or practice going?', this)"></button><span class="spoken" data-cn="你的[興趣/練習]進行得怎麼樣？">"How's your [hobby/practice] going? (e.g. guitar practice, marathon training)"</span></span></p>
+
+        <p><strong data-cn="一般休閒詢問：">General Leisure Inquiries:</strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('What do you usually like to do to unwind after work or on weekends?', this)"></button><span class="spoken" data-cn="你通常喜歡在下班後或週末做什麼來放鬆？">"What do you usually like to do to unwind after work / on weekends?"</span></span></p>
+
+        <p><strong data-cn="近期消遣：">Recent Pastimes:</strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Have you had a chance to go hiking or see that new movie lately?', this)"></button><span class="spoken" data-cn="你最近有機會去遠足或看那部新電影嗎？">"Have you had a chance to [activity: go hiking / see that new movie] lately?"</span></span></p>
+      </div>
+    </div>
+
+    <h2 data-cn="2. 積極聆聽：表示興趣（簡短回應詞與迴聲詞）">2. Active Listening: Showing Interest (Short Tokens & Echo Words)</h2>
+    <div class="task-section">
+      <h3 data-cn="簡短反應詞">Short Reaction Tokens</h3>
+      <div class="task-box">
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Really? That sounds fun!', this)"></button><span class="spoken" data-cn="真的嗎？聽起來很有趣！">"Really?" | "Oh yeah?" | "Wow!" | "That's great!" | "That sounds fun / amazing!" | "That's impressive!"</span></span></p>
+      </div>
+
+      <h3 data-cn="迴聲詞公式">Echo Word Formula</h3>
+      <div class="task-box">
+        <p data-cn="句型：「[關鍵詞]？聽起來[形容詞]！」或「[關鍵詞]？那是[好處]的好方法！」"><strong>Pattern:</strong> "[Keyword]? That sounds [adjective]!" or "[Keyword]? That's a great way to [benefit]!"</p>
+      </div>
+
+      <h3 data-cn="例子">Examples</h3>
+      <div class="task-box">
+        <p><strong data-cn="戶外／旅行：">Outdoor / Travel:</strong></p>
+        <div class="expr-text">
+          <span class="speaker">A:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('I went hiking in Sai Kung.', this, 'female')"></button><span class="spoken" data-cn="我去西貢遠足了。">"I went hiking in Sai Kung."</span></span><br>
+          <span class="speaker">B:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('Sai Kung? That sounds refreshing!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="西貢？聽起來很清爽！">"Sai Kung? That sounds refreshing!"</span></span>
+        </div>
+
+        <p><strong data-cn="創意藝術：">Creative Arts:</strong></p>
+        <div class="expr-text">
+          <span class="speaker">A:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('I took up photography recently.', this, 'female')"></button><span class="spoken" data-cn="我最近開始學攝影。">"I took up photography recently."</span></span><br>
+          <span class="speaker">B:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('Photography? That sounds fascinating!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="攝影？聽起來很迷人！">"Photography? That sounds fascinating!"</span></span>
+        </div>
+
+        <p><strong data-cn="健康／身心健康：">Health / Wellness:</strong></p>
+        <div class="expr-text">
+          <span class="speaker">A:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('I have started doing yoga every morning.', this, 'female')"></button><span class="spoken" data-cn="我開始每天早上做瑜伽了。">"I've started doing yoga every morning."</span></span><br>
+          <span class="speaker">B:</span> <span class="utterance"><button class="btn-icon" onclick="speakText('Yoga every morning? That is a great way to start the day!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="每天早上做瑜伽？那是開始一天的好方法！">"Yoga every morning? That's a great way to start the day!"</span></span>
+        </div>
+      </div>
+    </div>
+
+    <h2 data-cn="3. 給予正面評論和讚美">3. Giving Positive Comments & Compliments</h2>
+    <div class="task-section">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('That is an excellent way to spend your weekend and recharge.', this)"></button><span class="spoken" data-cn="那是度過週末和充電的絕佳方式。">"That's an excellent way to spend your weekend and recharge."</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Wow! Training for a marathon takes real dedication. I am sure you will do great!', this)"></button><span class="spoken" data-cn="哇！訓練馬拉松需要真正的奉獻精神。我相信你會做得很好！">"Wow! Training for a marathon takes real dedication. I'm sure you'll do great!"</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I also love acoustic guitar. It is so soothing after a long day.', this)"></button><span class="spoken" data-cn="我也很喜歡木吉他。在漫長的一天後它非常舒緩。">"I also love acoustic guitar. It's so soothing after a long day."</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('That sounds really therapeutic. I definitely need a creative hobby like that!', this)"></button><span class="spoken" data-cn="聽起來真的很療癒。我絕對需要一個像那樣的創意興趣！">"That sounds really therapeutic—I definitely need a creative hobby like that!"</span></span></div>
+    </div>
+
+    <h2 data-cn="4. 追問問題與語調指南">4. Follow-Up Questions & Intonation Guide</h2>
+    <div class="task-section">
+      <div class="task-box">
+        <p><strong data-cn="規則：">Rule:</strong></p>
+        <ul style="padding-left:20px;">
+          <li data-cn="是非題和迴聲疑問句使用升調（↗）（溫暖、好奇）。">Use <strong>Rising Intonation (↗)</strong> for Yes/No & Echo questions (warm, curious).</li>
+          <li data-cn="疑問詞問句使用降調（↘）（禮貌、自然）。">Use <strong>Falling Intonation (↘)</strong> for Wh- questions (polite, natural).</li>
+        </ul>
+      </div>
+
+      <table class="words">
+        <tr>
+          <th data-cn="問題類型">Question Type</th>
+          <th data-cn="興趣／休閒語境中的例子">Example in Hobbies / Leisure Context</th>
+          <th data-cn="語調">Intonation</th>
+        </tr>
+        <tr>
+          <td data-cn="迴聲疑問句（助動詞）">Echo Question (Auxiliary)</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('I am running a ten k race.', this, 'female')"></button><span class="spoken" data-cn="我正在跑十公里比賽。">A: "I am running a 10k race."</span></span> →<br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Are you? That sounds challenging!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="是嗎？聽起來很有挑戰性！">B: "Are you? That sounds challenging!"</span></span>
+          </td>
+          <td data-cn="升調（↗）">Rising (↗)</td>
+        </tr>
+        <tr>
+          <td data-cn="迴聲疑問句（助動詞）">Echo Question (Auxiliary)</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('I have just bought a road bike.', this, 'female')"></button><span class="spoken" data-cn="我剛買了一輛公路單車。">A: "I've just bought a road bike."</span></span> →<br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Have you? That is fantastic!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="真的嗎？太棒了！">B: "Have you? That's fantastic!"</span></span>
+          </td>
+          <td data-cn="升調（↗）">Rising (↗)</td>
+        </tr>
+        <tr>
+          <td data-cn="迴聲疑問句（無助動詞）">Echo Question (No Aux.)</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('I love playing board games.', this, 'female')"></button><span class="spoken" data-cn="我喜歡玩桌遊。">A: "I love playing board games."</span></span> →<br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Do you? That sounds entertaining!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="真的嗎？聽起來很有趣！">B: "Do you? That sounds entertaining!"</span></span>
+          </td>
+          <td data-cn="升調（↗）">Rising (↗)</td>
+        </tr>
+        <tr>
+          <td data-cn="迴聲疑問句（無助動詞）">Echo Question (No Aux.)</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('I ran my first marathon.', this, 'female')"></button><span class="spoken" data-cn="我跑了第一次馬拉松。">A: "I ran my first marathon."</span></span> →<br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Did you? That is impressive!', this, 'male')"></button><span class="spoken" style="color:#1a7f37;" data-cn="真的嗎？太厲害了！">B: "Did you? That's impressive!"</span></span>
+          </td>
+          <td data-cn="升調（↗）">Rising (↗)</td>
+        </tr>
+        <tr>
+          <td data-cn="疑問詞問句">Wh- Question</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Where did you go hiking on Saturday?', this, 'female')"></button><span class="spoken" data-cn="你週六去哪裡遠足了？">"Where did you go hiking on Saturday?"</span></span><br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('What kind of music do you play?', this, 'female')"></button><span class="spoken" data-cn="你彈什麼類型的音樂？">"What kind of music do you play?"</span></span>
+          </td>
+          <td data-cn="降調（↘）">Falling (↘)</td>
+        </tr>
+        <tr>
+          <td data-cn="是非題">Yes/No Question</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Do you enjoy spending time outdoors?', this, 'female')"></button><span class="spoken" data-cn="你喜歡在戶外度過時光嗎？">"Do you enjoy spending time outdoors?"</span></span><br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('Have you read any good books lately?', this, 'female')"></button><span class="spoken" data-cn="你最近有看什麼好書嗎？">"Have you read any good books lately?"</span></span>
+          </td>
+          <td data-cn="升調（↗）">Rising (↗)</td>
+        </tr>
+        <tr>
+          <td data-cn="附加問句">Question Tag</td>
+          <td>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('It is a really relaxing hobby... isn\\'t it?', this, 'female')"></button><span class="spoken" data-cn="這是一個非常放鬆的興趣，對吧？">"It's a really relaxing hobby, isn't it?"</span></span><br>
+            <span class="utterance"><button class="btn-icon" onclick="speakText('You do not play tennis... do you?', this, 'female')"></button><span class="spoken" data-cn="你不打網球，對吧？">"You don't play tennis, do you?"</span></span>
+          </td>
+          <td data-cn="↘ 同意 / ↗ 詢問">↘ Agree / ↗ Ask</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 data-cn="5. 轉換話題和推薦消遣">5. Transitioning & Recommending Pastimes</h2>
+    <div class="task-section">
+      <div class="task-box">
+        <p><strong data-cn="「說到[消遣]……">"Speaking of [pastime]..."</strong></strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Speaking of outdoor activities, have you ever hiked the Dragons Back trail?', this)"></button><span class="spoken" data-cn="說到戶外活動，你爬過龍脊嗎？">"Speaking of outdoor activities, have you ever hiked the Dragon's Back trail?"</span></span></p>
+      </div>
+      <div class="task-box">
+        <p><strong data-cn="「順便說一下……">"By the way..."</strong></strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('By the way, there is an art exhibition at the cultural museum this weekend that looks fun.', this)"></button><span class="spoken" data-cn="順便說一下，這個週末文化博物館有一場看起來很有趣的藝術展覽。">"By the way, there's an art exhibition at the cultural museum this weekend that looks fun."</span></span></p>
+      </div>
+      <div class="task-box">
+        <p><strong data-cn="「那讓我想起……">"That reminds me..."</strong></strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('That reminds me, I have been wanting to try bouldering. Do you know any good climbing gyms?', this)"></button><span class="spoken" data-cn="那讓我想起，我一直想嘗試攀岩。你知道有什麼好的攀岩館嗎？">"That reminds me, I've been wanting to try bouldering. Do you know any good climbing gyms?"</span></span></p>
+      </div>
+      <div class="task-box">
+        <p><strong data-cn="量身推薦：">Tailored Suggestion:</strong></p>
+        <p class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('If you like strategy games, you would really love Catan. It is so engaging!', this)"></button><span class="spoken" data-cn="如果你喜歡策略遊戲，你一定會喜歡卡坦島。它非常引人入勝！">"If you like strategy games, you'd really love Catan—it's so engaging!"</span></span></p>
+      </div>
+    </div>
+
+    <h2 data-cn="6. 禮貌地結束對話">6. Ending the Conversation Politely</h2>
+    <div class="task-section">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('It was great chatting about your hiking trips! We should organize a hike together sometime.', this)"></button><span class="spoken" data-cn="很高興聊到你的遠足旅行！我們應該找個時間一起組織一次遠足。">"It was great chatting about your hiking trips! We should organize a hike together sometime."</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I would love to chat more about your photography, but I have got to run to my next meeting. Catch you later!', this)"></button><span class="spoken" data-cn="我很想再多聊聊你的攝影，但我得去開下一個會議了。回頭見！">"I'd love to chat more about your photography, but I've got to run to my next meeting. Catch you later!"</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Well, it was lovely catching up. Have a great weekend enjoying your guitar practice!', this)"></button><span class="spoken" data-cn="嗯，很高兴能聊聊天。祝你週末愉快，享受你的吉他練習！">"Well, it was lovely catching up. Have a great weekend enjoying your guitar practice!"</span></span></div>
+    </div>
+
+    <h2 data-cn="7. 精簡詞彙與目標形容詞庫">7. Compact Vocabulary & Target Adjectives Bank</h2>
+    <div class="task-section">
+      <table class="words">
+        <tr>
+          <th data-cn="興趣類別">Hobby Category</th>
+          <th data-cn="目標形容詞（感受與特質）">Target Adjectives (Feelings & Qualities)</th>
+          <th data-cn="實用搭配詞／動詞">Useful Collocations / Verbs</th>
+        </tr>
+        <tr>
+          <td><strong data-cn="戶外與運動">Outdoor & Sports</strong><br>(Hiking, Running, Cycling, Ball Games)</td>
+          <td data-cn="活躍的、清爽的、振奮的、 demanding、 exhausting、 triumphal、 exhilarating">active, refreshing, invigorating, demanding, exhausting, triumphant, exhilarating</td>
+          <td data-cn="hike scenic trails, train for a race, stay in shape, push oneself">hike scenic trails, train for a race, stay in shape, push oneself</td>
+        </tr>
+        <tr>
+          <td><strong data-cn="創意與藝術">Creative & Artistic</strong><br>(Photography, Guitar, Painting, Baking)</td>
+          <td data-cn="有創造力的、 fulfilling、 artistic、 therapeutic、 soothing、 hands-on、 delightful、 delicious">creative, fulfilling, artistic, therapeutic, soothing, hands-on, delightful, delicious</td>
+          <td data-cn="take up photography, learn chord progressions, knead dough, express creativity">take up photography, learn chord progressions, knead dough, express creativity</td>
+        </tr>
+        <tr>
+          <td><strong data-cn="正念與身心健康">Mindful & Wellness</strong><br>(Yoga, Meditation, Walking, Reading)</td>
+          <td data-cn=" calming、 peaceful、 restorative、 relaxing、 serene、 therapeutic、 energizing">calming, peaceful, restorative, relaxing, serene, therapeutic, energizing</td>
+          <td data-cn="unwind after work, practice mindfulness, clear one's mind, stretch">unwind after work, practice mindfulness, clear one's mind, stretch</td>
+        </tr>
+        <tr>
+          <td><strong data-cn="社交與娛樂">Social & Entertainment</strong><br>(Board Games, Movies, Live Music)</td>
+          <td data-cn=" entertaining、 lively、 social、 engaging、 stimulating、 captivating、 memorable">entertaining, lively, social, engaging, stimulating, captivating, memorable</td>
+          <td data-cn="host game nights, connect with friends, binge-watch series, check out live gigs">host game nights, connect with friends, binge-watch series, check out live gigs</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================= Lesson 2 Activity: Describing a Hobby ================= -->
+  <div class="tab-content" id="tab-1">
+    <span class="part-badge">Lesson 2 Activity</span>
+    <h1 data-cn="描述興趣或消遣活動">Describing a Hobby or Leisure Activity</h1>
+
+    <div class="char-card">
+      <div>
+        <div class="char-caption" data-cn="寫30-50個字描述你最喜歡的興趣">Write 30-50 words to describe your favourite hobby</div>
+        <p style="color:#555;" data-cn="使用形容詞豐富你的描述。所有描述性形容詞都已<u>底線標示</u>，以展示如何豐富你的寫作。">Use adjectives to enrich your description. All descriptive adjectives in the model samples are <u>highlighted</u> to demonstrate how to enrich your writing.</p>
+      </div>
+    </div>
+
+    <div class="task-box">
+      <p><strong data-cn="說明：">Instructions:</strong></p>
+      <ul style="padding-left:20px;">
+        <li data-cn="寫30-50個字談談你最喜歡的興趣、消遣活動或嗜好。">Write 30-50 words to talk about your favourite hobby, leisure activity, or pastime.</li>
+        <li data-cn="你可以虛構資訊或引用你的真实經驗。">You can make up information or quote your real experience.</li>
+        <li data-cn="使用列表中的形容詞：active, calming, enjoyable, therapeutic, entertaining, exciting, fulfilling, refreshing, relaxing, rewarding, creative, invigorating。">Use adjectives from the list: <em>active, calming, enjoyable, therapeutic, entertaining, exciting, fulfilling, refreshing, relaxing, rewarding, creative, invigorating</em>.</li>
+        <li data-cn="使用以下範本作為參考。">Use the samples below to help you.</li>
+      </ul>
+    </div>
+
+    <h2 data-cn="範本">Model Samples</h2>
+
+    <h3 data-cn="1. 遠足／鄉村步行">1. Hiking / Countryside Walking</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Hiking in the countryside is my absolute favourite pastime because it is both refreshing and peaceful. Last Saturday, I hiked the Dragons Back trail. The coastal views were breathtaking, and the cool mountain air was truly invigorating. It is a fantastic way to unwind after a busy week.', this)"></button><span class="spoken" data-cn="在鄉村遠足是我最喜歡的消遣，因為它既清爽又寧靜。上週六，我爬了龍脊。海岸景色令人嘆為觀止，涼爽的山間空氣確實令人振奮。這是忙碌一週後放鬆的好方法。">Hiking in the countryside is my absolute favourite pastime because it is both <u>refreshing</u> and <u>peaceful</u>. Last Saturday, I hiked the Dragon's Back trail. The coastal views were <u>breathtaking</u>, and the cool mountain air was truly <u>invigorating</u>. It is a <u>fantastic</u> way to unwind after a busy week.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(48 words)</p>
+    </div>
+
+    <h3 data-cn="2. 街頭攝影">2. Street Photography</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I took up street photography last year, and it has been an incredibly creative and fulfilling hobby. Exploring vibrant city streets with my camera is always fascinating. Capturing candid moments makes the whole pastime deeply rewarding and memorable.', this)"></button><span class="spoken" data-cn="我去年開始學街頭攝影，這一直是一個非常有創造力和成就感的興趣。帶著相機探索充滿活力的城市街道總是令人著迷。捕捉自然的時刻使整個消遣活動非常有回報和難忘。">I took up street photography last year, and it has been an incredibly <u>creative</u> and <u>fulfilling</u> hobby. Exploring <u>vibrant</u> city streets with my camera is always <u>fascinating</u>. Capturing candid moments makes the whole pastime deeply <u>rewarding</u> and <u>memorable</u>.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(40 words)</p>
+    </div>
+
+    <h3 data-cn="3. 木吉他">3. Acoustic Guitar</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Playing the acoustic guitar is a deeply calming and therapeutic pastime for me. After a hectic day, practicing simple fingerpicking songs feels very soothing. Learning new chords is sometimes challenging, but mastering a complete song is immensely satisfying.', this)"></button><span class="spoken" data-cn="彈木吉他對我來說是一個非常 calm 和療癒的消遣。在忙碌的一天後，練習簡單的指彈歌曲感覺非常舒緩。學習新和弦有時很有挑戰性，但掌握一首完整的歌曲會帶來巨大的滿足感。">Playing the acoustic guitar is a deeply <u>calming</u> and <u>therapeutic</u> pastime for me. After a hectic day, practicing simple fingerpicking songs feels very <u>soothing</u>. Learning new chords is sometimes <u>challenging</u>, but mastering a complete song is immensely <u>satisfying</u>.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(40 words)</p>
+    </div>
+
+    <h3 data-cn="4. 早晨瑜伽">4. Morning Yoga</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I practice yoga four mornings a week. It is an enjoyable and restorative activity that keeps me physically flexible and mentally focused. The gentle stretches are remarkably calming, providing an energizing boost before work.', this)"></button><span class="spoken" data-cn="我每週四個早晨練習瑜伽。這是一種令人愉快且恢復活力的活動，讓我保持身體靈活和精神集中。溫和的伸展運動非常 calm，為工作前提供振奮的能量。">I practice yoga four mornings a week. It is an <u>enjoyable</u> and <u>restorative</u> activity that keeps me physically flexible and mentally focused. The gentle stretches are remarkably <u>calming</u>, providing an <u>energizing</u> boost before work.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(41 words)</p>
+    </div>
+
+    <h3 data-cn="5. 桌遊">5. Board Gaming</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Hosting board game nights with my friends is my favourite social pastime. It is always lively, entertaining, and full of laughter. We especially enjoy strategy games because they are intellectually stimulating and engaging. It is a wonderful way to connect.', this)"></button><span class="spoken" data-cn="和朋友舉辦桌遊之夜是我最喜歡的社交消遣。它總是充滿活力、娛樂性和歡笑。我們特別喜歡策略遊戲，因為它們在智力上引人入勝且引人入勝。這是聯繫感情的好方法。">Hosting board game nights with my friends is my favourite social pastime. It is always <u>lively</u>, <u>entertaining</u>, and full of laughter. We especially enjoy strategy games because they are intellectually <u>stimulating</u> and <u>engaging</u>. It is a <u>wonderful</u> way to connect.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(41 words)</p>
+    </div>
+
+    <h3 data-cn="6. 手工烘焙">6. Artisanal Baking</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Baking sourdough bread on Sunday mornings is a delightful and hands-on hobby. Kneading dough is surprisingly therapeutic, and the aroma from the oven is completely mouthwatering. Sharing warm, crispy loaves with family makes it an exceptionally gratifying pastime.', this)"></button><span class="spoken" data-cn="在週日早晨烤酸麵團麵包是一個令人愉快且親自動手的興趣。揉麵團非常療発，烤箱散發的香氣非常令人垂涎。與家人分享溫暖、酥脆的麵包使它成為一種非常令人滿意的消遣。">Baking sourdough bread on Sunday mornings is a <u>delightful</u> and <u>hands-on</u> hobby. Kneading dough is surprisingly <u>therapeutic</u>, and the aroma from the oven is completely <u>mouthwatering</u>. Sharing warm, crispy loaves with family makes it an exceptionally <u>gratifying</u> pastime.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(41 words)</p>
+    </div>
+
+    <h3 data-cn="7. 長跑">7. Distance Running</h3>
+    <div class="task-box">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I have been training for a 10-kilometer race, which is an active and exhilarating sport. Although long-distance training can be physically demanding and exhausting, crossing the finish line feels completely triumphant and empowering.', this)"></button><span class="spoken" data-cn="我一直在為10公里比賽訓練，這是一項活躍且令人振奮的運動。雖然長跑訓練在體力上要求很高且令人筋疲力盡，但衝過終點線的感覺完全勝利和振奮。">I have been training for a 10-kilometer race, which is an <u>active</u> and <u>exhilarating</u> sport. Although long-distance training can be physically <u>demanding</u> and <u>exhausting</u>, crossing the finish line feels completely <u>triumphant</u> and <u>empowering</u>.</span></span></div>
+      <p style="color:#888; font-size:13px; margin-top:4px;">(39 words)</p>
+    </div>
+
+    <h2 data-cn="輪到你了">Your Turn</h2>
+    <div class="task-box">
+      <p><strong data-cn="在下面寫下你自己的30-50字描述。記得用底線標示你的形容詞！">Write your own 30-50 word description below. Remember to highlight and underline your adjectives!</strong></p>
+      <div contenteditable="true" style="min-height:120px; border:1px dashed #9370db; border-radius:8px; padding:12px; margin-top:10px; background:#faf5ff; outline:none;" data-ph="Write your description here..."></div>
+    </div>
+  </div>
+
+  <!-- ================= Lesson 3: Work Projects ================= -->
+  <div class="tab-content" id="tab-2">
+    <span class="part-badge">Lesson 3</span>
+    <h1 data-cn="閒聊部門項目">Small talk on Department Projects</h1>
+
+    <h2 data-cn="三個階段的時態">Three stages — use the correct tenses</h2>
+    <table class="words tenses">
+      <tr>
+        <th data-cn="時態">Tense</th>
+        <th data-cn="功能">Function</th>
+        <th data-cn="形式">Form</th>
+      </tr>
+      <tr>
+        <td><strong data-cn="現在完成式">Present perfect</strong></td>
+        <td data-cn="描述最近已完成的事情">To describe what has been completed recently</td>
+        <td>Have/has + past participle verb</td>
+      </tr>
+      <tr>
+        <td><strong data-cn="現在進行式">Present continuous</strong></td>
+        <td data-cn="描述正在發生的事情">To describe what is happening now</td>
+        <td>Am/is/are + present participle verb</td>
+      </tr>
+      <tr>
+        <td><strong data-cn="未來式">Future tense</strong></td>
+        <td data-cn="描述將來會發生的事情">To describe what will happen</td>
+        <td>Will + base form of verb</td>
+      </tr>
+    </table>
+
+    <h2 data-cn="實用搭配詞">Useful Collocations</h2>
+
+    <h3 data-cn="Healthfirst Medical (CA Practice 2)">Healthfirst Medical (CA Practice 2)</h3>
+    <div class="task-section">
+      <table class="words stacked">
+        <tr><th data-cn="搭配詞">Collocations</th></tr>
+        <tr><td><span class="cn-word" data-cn="發起活動">launch (v.) campaigns (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="推廣流動健康診所">promote (v.) mobile health clinics (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="與社區中心合作">partner (v.) with community centres (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="整合排程系統">integrated (v.) a scheduling system (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="審查會員的意見">reviewed (v.) members' opinions (n.)</span></td></tr>
+      </table>
+    </div>
+
+    <h3 data-cn="Boost Health Fitness Centre (CA Practice 1)">Boost Health Fitness Centre (CA Practice 1)</h3>
+    <div class="task-section">
+      <table class="words stacked">
+        <tr><th data-cn="搭配詞">Collocations</th></tr>
+        <tr><td><span class="cn-word" data-cn="儲備補充品">stock (v.) supplements (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="與健身方面有影響力的人合作">team (v.) up with fitness influencers (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="擴展產品範圍">expand (v.) the product range (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="推出自動售貨機">launch (v.) a vending machine (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="制定線上推廣計劃">develop (v.) an online promotional plan (n.)</span></td></tr>
+      </table>
+    </div>
+
+    <h3 data-cn="DILWL — Online Media HK (Practice 1)">DILWL — Online Media HK (Practice 1)</h3>
+    <div class="task-section">
+      <table class="words stacked">
+        <tr><th data-cn="搭配詞">Collocations</th></tr>
+        <tr><td><span class="cn-word" data-cn="設計冬季系列">designing (v.) the winter collection (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="改善公司的網站">revamping (v.) the company's website (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="開發線上購物應用程式">developing (v.) a mobile app for online shopping (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="與品牌合作舉辦活動">collaborating (v.) with brands for events (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="確定設計">finalizing (v.) designs (n.)</span></td></tr>
+      </table>
+    </div>
+
+    <h3 data-cn="DILWL — Topsy Company (Practice 2)">DILWL — Topsy Company (Practice 2)</h3>
+    <div class="task-section">
+      <table class="words stacked">
+        <tr><th data-cn="搭配詞">Collocations</th></tr>
+        <tr><td><span class="cn-word" data-cn="與關鍵意見領袖合作">engaging (v.) key opinion leaders (KOL) (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="加強內部溝通渠道">enhancing (v.) internal communication channels (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="識別減少紙張使用的領域">identifying (v.) areas to reduce paper usage (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="推出適合移動設備的界面">launching (v.) a mobile-friendly interface (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="進行樣品試穿">conducting (v.) fittings for prototypes (n.)</span></td></tr>
+      </table>
+    </div>
+
+    <h3 data-cn="DILWL — Active Sportswear (Practice 3)">DILWL — Active Sportswear (Practice 3)</h3>
+    <div class="task-section">
+      <table class="words stacked">
+        <tr><th data-cn="搭配詞">Collocations</th></tr>
+        <tr><td><span class="cn-word" data-cn="設計冬季系列">designing (v.) the winter collection (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="改善公司的網站">revamping (v.) the company's website (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="開發線上購物應用程式">developing (v.) a mobile app for online shopping (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="與品牌合作舉辦活動">collaborating (v.) with brands for events (n.)</span></td></tr>
+        <tr><td><span class="cn-word" data-cn="確定設計">finalizing (v.) designs (n.)</span></td></tr>
+      </table>
+    </div>
+
+    <h2 data-cn="例子">Examples</h2>
+
+    <h3 data-cn="Healthfirst Medical">Healthfirst Medical</h3>
+    <div class="task-box">
+      <p><strong>Charlie Chan (A - Marketing Assistant) — Promoting mobile health clinics:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="到目前為止，我們已經在線上和本地社區發起了活動。目前，我們正在推廣流動健康診所。在未來幾個月，我們將與當地學校和社區中心合作，進一步推廣這些服務。">So far, we've launched campaigns both online and in the local community. Right now, we're promoting mobile health clinics. In the coming months, we will partner with local schools and community centres to promote these services even further.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong>Parker Leung (B - Operations Assistant) — Launching a new patient appointment scheduling system:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們已經將它與現有系統整合了。目前，我們正在培訓員工如何使用它。下個月，我們將使預約流程更加順暢。">We've already integrated it with our existing systems. Currently, we're training staff on how to use it. Next month, we will make the booking process much smoother for everyone.</span></div>
+    </div>
+
+    <h3 data-cn="Boost Health Fitness Centre">Boost Health Fitness Centre</h3>
+    <div class="task-box">
+      <p><strong>Alex Lam (A - Operations Assistant) — Installing a health products vending machine at the gym:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們已經審查了會員的意見，並儲備了補充品、蛋白棒和運動飲料。目前，我們正在健身房安裝自動售貨機。在未來幾個月，我們將擴展產品範圍，並在今年夏天底推出自動售貨機。">We've reviewed members' opinions and stocked it with supplements, protein bars, and sports drinks. Currently, we're installing the vending machine at the gym. In the coming months, we will expand our product range and launch the vending machine by the end of this summer.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong>Jacob Wong (B - Marketing Assistant) — Boosting gym membership:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們已經制定了一個線上推廣計劃來吸引新會員。目前，我們正在與當地健身方面有影響力的人合作。在未來幾個月，我們將推出「為夏天做好準備」社交媒體活動，以增加我們的健身會員。">We've developed an online promotional plan to attract new members. Currently, we're teaming up with local fitness influencers. In the coming months, we will launch a 'Get Ready for Summer' social media campaign to increase our gym membership.</span></div>
+    </div>
+
+    <h3 data-cn="DILWL — Online Media HK (Practice 1)">DILWL — Online Media HK (Practice 1)</h3>
+    <div class="task-box">
+      <p><strong>Gladys Yeung (Marketing Officer, Student A) — Engaging Key Opinion Leaders (KOLs) and/or influencers:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們正在為公司設計一系列新的Instagram帖子，關注飲食趨勢以吸引網紅。我們希望未來能與品牌合作舉辦品嚐活動。">We are designing a new series of Instagram posts for the company, keeping an eye on the food and beverage trend to engage influencers. We hope to collaborate with brands for tasting events in the future.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong>Edith Li (Administrative Officer, Student B) — Revamping the company's website:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們已經推出了一個適合移動設備的界面，現在正在改進圖片描述以提高可訪問性。我們預計將在本季度末收到有關這些功能的報告。">We have launched a mobile-friendly interface and are now working on improving image descriptions for accessibility. We expect the report on these features by the end of the quarter.</span></div>
+    </div>
+
+    <h3 data-cn="DILWL — Topsy Company (Practice 2)">DILWL — Topsy Company (Practice 2)</h3>
+    <div class="task-box">
+      <p><strong>Alex Cheung (IT Officer, Student A) — Enhancing internal communication channels:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們正在內部網路上設立一個中央门户，以改善各辦公室之間的溝通。這將使區域辦公室能夠更有效地訪問資源並建立我們的系統。">We're setting up a central portal on our intranet to improve communication across offices. This will allow regional offices to access resources more efficiently and build upon our system.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong>Jamie Chau (Administrative Officer, Student B) — Streamlining workflow to reduce paper usage:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們正在識別減少紙張使用的領域，預計將在第三季度收到報告。我們希望根據調查結果實施新政策，使流程更加環保。">We are identifying areas to reduce paper usage, and a report is expected by the third quarter. We are hoping to implement new policies based on the findings to make the process more eco-friendly.</span></div>
+    </div>
+
+    <h3 data-cn="DILWL — Active Sportswear (Practice 3)">DILWL — Active Sportswear (Practice 3)</h3>
+    <div class="task-box">
+      <p><strong>Samantha Lee (Fashion Designer, Student A) — Designing the Winter Collection 2024:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們已經為冬季系列選擇了「動態演進」的主題，完成了情緒板，並且很快將確定設計。接下來的步驟包括面料選擇和進行樣品試穿。">We've chosen the theme 'Dynamic Evolution' for the winter collection, completed mood boards, and will soon finalize designs. Next steps include fabric selection and conducting fittings for prototypes.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong>Vincent Chan (IT Officer, Student B) — Developing a mobile app for enhanced online shopping:</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我們正在開發一個具有新界面的移動應用程式，用於線上購物。接下來，我們將添加系列圖片和價格。測試應用程式的功能是我們未來幾個月的目標。">We're developing a mobile app with a new interface for online shopping. Next, we'll add the collection pictures and prices. Testing the app's functionality is our goal for the coming months.</span></div>
+    </div>
+  </div>
+
+  <!-- ================= Part 3: Opinions on Policy ================= -->
+  <div class="tab-content" id="tab-3">
+    <span class="part-badge">Lesson 4</span>
+    <h1 data-cn="分享你對公司政策的意見">Share your opinions on a new company policy</h1>
+
+    <h2 data-cn="表達意見">Expressing opinions</h2>
+    <div class="task-section">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('I think, feel, believe, reckon, love something.', this)"></button><span class="spoken" data-cn="我認為／覺得／相信／認為／很喜歡……">I think / feel / believe / reckon / love…</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('In my view or opinion, something.', this)"></button><span class="spoken" data-cn="在我看來／我認為，……">In my view / opinion, …</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('On the one hand, something. On the other hand, something.', this)"></button><span class="spoken" data-cn="一方面，……另一方面，……">On the one hand, … On the other hand, …</span></span></div>
+    </div>
+
+    <h2 data-cn="說明原因與影響">Stating causes &amp; explaining effects</h2>
+    <div class="task-section">
+      <ul style="padding-left:20px;">
+        <li><strong data-cn="原因">Causes:</strong> <span class="utterance"><button class="btn-icon" onclick="speakText('because, since, as', this)"></button><span class="spoken" data-cn="……因為／由於／既然……">…because / since / as…</span></span></li>
+        <li><strong data-cn="影響">Effects:</strong> <span class="utterance"><button class="btn-icon" onclick="speakText('so, as a result, therefore, consequently', this)"></button><span class="spoken" data-cn="……所以……／因此，……／所以／因此，……">…so… / As a result, … / Therefore / Consequently, …</span></span></li>
+      </ul>
+    </div>
+
+    <h2 data-cn="分享個人經驗">Sharing personal experiences</h2>
+    <div class="task-section">
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('My position is that something.', this)"></button><span class="spoken" data-cn="我的立場是……">My position is that…</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('Personally speaking, something.', this)"></button><span class="spoken" data-cn="就個人而言，……">Personally speaking, …</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('My personal feeling is that something.', this)"></button><span class="spoken" data-cn="我個人的感覺是……">My personal feeling is that…</span></span></div>
+      <div class="expr-text"><span class="utterance"><button class="btn-icon" onclick="speakText('My own experience is that something.', this)"></button><span class="spoken" data-cn="我自己的經驗是……">My own experience is that…</span></span></div>
+      <p style="color:#888; font-size:14px; margin-top:6px;"><strong data-cn="舉例說明：">Giving examples:</strong> <span class="utterance"><button class="btn-icon" onclick="speakText('For example or instance, something.', this)"></button><span class="spoken" data-cn="例如／譬如，……">For example / instance, …</span></span></p>
+    </div>
+
+    <h2 data-cn="例子">Examples</h2>
+
+    <h3 data-cn="Work From Home (WFH) Policy">Work From Home (WFH) Policy</h3>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Alex Lam):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我認為這是一個非常積極的進步，因為它給我更多的靈活性和更好的工作與生活平衡。在旅行上節省更多時間是一個巨大的優勢，在家工作政策的日子通常壓力較小。下班後我也應該有更多的時間進行個人活動，所以它可以增強我的整體幸福感。">I think it's a very positive step forward because it gives me more flexibility and a better work–life balance. Saving more time on travelling is a huge plus and Work From Home days are generally less stressful. I should also have more time for personal activities after work so it can enhance my overall well-being.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong style="color:#9a3412;" data-cn="負面關注">Concern (Jacob Wong):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="它似乎在許多公司越來越受歡迎。我認為它可以提高一些同事的生產力。但是，我擔心在處理工作相關事務時與團隊成員溝通可能會很有挑戰性。當我們在家工作時，擁有適當的溝通渠道對於確保有效的團隊合作非常重要。">It seems to be increasingly popular in many companies. I think it can improve productivity for some colleagues. However, I'm worried that it might be challenging to communicate with my team members on work-related matters. It's important to have proper communication channels when we work from home to ensure effective teamwork.</span></div>
+    </div>
+
+    <h3 data-cn="Professional Development Policy">Professional Development Policy</h3>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Charlie Chan):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="提供免費的線上課程和培訓研討會將使我們能夠在沒有任何額外費用的情況下提高我們的技能。此外，這是提高員工士氣和個人成長的好方法。">Offering free online courses and training workshops will allow us to improve our skills without any additional costs. Plus, it's a great way to boost employee morale and personal growth.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong style="color:#9a3412;" data-cn="負面關注">Concern (Parker Leung):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="然而，我可以理解一些員工可能會因為要在工作量中增加更多內容而感到不知所措。要平衡工作和學習可能很困難。">However, I can see how some employees might feel overwhelmed by the idea of adding more to their workload. It could be tough to balance work and learning.</span></div>
+    </div>
+
+    <h3 data-cn="Denim Outfits on Fridays Policy">Denim Outfits on Fridays Policy</h3>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Samantha Lee):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="作為一個有創造力的人，我喜歡穿最能代表我並反映我獨特風格的衣服。這項新政策無疑會增強我的創造力和工作效率。">As a creative person I would love to wear clothes that best represent me and reflect my unique style. This new policy will undoubtedly enhance my creativity and work efficiency.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Vincent Chan):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我完全同意。星期五穿牛仔布可以讓我們表達獨特的風格，培養積極的工作環境。這項新政策與我的衣櫃完美搭配，讓我在辦公室展示我的個人風格。">I couldn't agree more. Dressing in denim on Fridays allows us to express our unique style, fostering a positive work environment. This new policy is a perfect match for my wardrobe and allows me to showcase my personal style in the office.</span></div>
+    </div>
+
+    <h3 data-cn="Flexi Lunch Break Policy">Flexi Lunch Break Policy</h3>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Gladys Yeung):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="這項新政策讓我可以在中午更早吃午飯，以便為下午的工作恢復精力。更重要的是，我發現自己被授權對自己的時間表做出決定。">The new policy allows me to have my lunch earlier so that I can refresh myself for the afternoon work. More importantly, I find myself empowered to make the decisions about my own schedules.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong style="color:#9a3412;" data-cn="負面關注">Concern (Edith Li):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="我同意這項政策可以提高員工的生產力和歸屬感。但我最擔心的是與同事協調的困難。當午休時間變得靈活時，可能會導致時間安排衝突或工作流程中斷。">I agree that the policy could improve employees' productivity and sense of belonging. What I concern the most is the difficulty in coordinating with colleagues. When lunch breaks become flexible, it could lead to scheduling conflicts or disruptions in workflow.</span></div>
+    </div>
+
+    <h3 data-cn="Remote Office Policy">Remote Office Policy</h3>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Alex Cheung):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="這項政策讓我有更多靈活性，可以更接近我的家人。我相信這將使我能夠更專注於提供高品質的工作，而不必擔心我的家人。">This policy allows me to have more flexibility to be in close proximity with my family. I believe this will enable me to be more focused in delivering quality work without having to worry about my family.</span></div>
+    </div>
+    <div class="task-box">
+      <p><strong style="color:#2f6b3a;" data-cn="正面意見">Positive (Jamie Chau):</strong></p>
+      <div class="expr-text"><span class="spoken" data-cn="它不僅可以提高我們的員工士氣，而且我認為從長遠來看它可以降低流失率。對於那些住在遠處的人來說，它還可以節省我們大量的通勤時間，讓我們不會因為通勤而感到疲倦。它也可以更容易地管理工作與生活的平衡。">Not only can it improve our staff morale but I think it could decrease the turnover rate in the long run. It'll also be easier to manage work-life balance. Not to mention the policy itself would save us a lot of commute time for those who live afar, allowing us to be less tired from commuting. It'll also be easier to manage work life balance as well.</span></div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<script>
+let synth = window.speechSynthesis;
+let currentWordEl = null;
+
+function switchTab(index) {
+  if (typeof stopAll === 'function') stopAll();
+  const contents = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.tab-btn');
+  contents.forEach(c => c.classList.remove('active'));
+  buttons.forEach(b => b.classList.remove('active'));
+  contents[index].classList.add('active');
+  buttons[index].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Chinese translation toggle
+function toggleAllCN(show) {
+  document.querySelector('.container').classList.toggle('cn-active', show);
+}
+
+function initTranslations() {
+  document.querySelectorAll('[data-cn]').forEach(el => {
+    if (el.dataset.cnProcessed) return;
+    el.dataset.cnProcessed = '1';
+    const trans = document.createElement('div');
+    trans.className = 'cn-translation';
+    trans.textContent = el.dataset.cn;
+    el.after(trans);
+  });
+}
+
+// Word pronunciation (browser TTS)
+function wrapWordsInEl(el) {
+  el.normalize();
+  Array.from(el.childNodes).forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const words = node.textContent.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      words.forEach(w => {
+        if (w.trim() === '') {
+          frag.appendChild(document.createTextNode(w));
+        } else {
+          const wordSpan = document.createElement('span');
+          wordSpan.className = 'word';
+          wordSpan.textContent = w;
+          wordSpan.addEventListener('click', function(e) {
+            e.stopPropagation();
+            speakWord(w.replace(/[^a-zA-Z'-]/g, ''), this);
+          });
+          frag.appendChild(wordSpan);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      wrapWordsInEl(node);
+    }
+  });
+}
+
+function initWordClick() {
+  document.querySelectorAll('.expr-text .spoken, .task-box .spoken, .task-section .spoken').forEach(wrapWordsInEl);
+}
+
+// Get Edge natural sounding British voice
+function getEdgeVoice(gender) {
+  const voices = synth.getVoices();
+  
+  // British female voices
+  const femaleBritish = [
+    'Microsoft Sonia',
+    'Microsoft Zira',
+    'en-GB-SoniaNeural',
+    'en-GB-Female'
+  ];
+  
+  // British male voices
+  const maleBritish = [
+    'Microsoft Ryan',
+    'Microsoft David',
+    'en-GB-RyanNeural',
+    'en-GB-Male'
+  ];
+  
+  if (gender === 'male') {
+    for (const name of maleBritish) {
+      const found = voices.find(v => v.name && v.name.includes(name));
+      if (found) return found;
+    }
+  } else if (gender === 'female') {
+    for (const name of femaleBritish) {
+      const found = voices.find(v => v.name && v.name.includes(name));
+      if (found) return found;
+    }
+  }
+  
+  // Default: try female first, then male
+  for (const name of [...femaleBritish, ...maleBritish]) {
+    const found = voices.find(v => v.name && v.name.includes(name));
+    if (found) return found;
+  }
+  
+  // Fallback to any British English voice
+  return voices.find(v => v.lang && v.lang.startsWith('en-GB')) || 
+         voices.find(v => v.lang && v.lang.startsWith('en')) || null;
+}
+
+function speakWord(word, el, gender) {
+  if (!word) return;
+  if (synth.speaking) {
+    synth.cancel();
+    if (currentWordEl) currentWordEl.classList.remove('speaking');
+    if (currentWordEl === el) { currentWordEl = null; return; }
+  }
+  if (currentWordEl) currentWordEl.classList.remove('speaking');
+  el.classList.add('speaking');
+  currentWordEl = el;
+  const utter = new SpeechSynthesisUtterance(word);
+  utter.rate = 0.85;
+  utter.pitch = 1;
+  // Use gender parameter, or fall back to voice selector, or default to female
+  const selectedGender = gender || document.getElementById('voiceSelect').value || 'female';
+  const v = getEdgeVoice(selectedGender);
+  if (v) utter.voice = v;
+  utter.onend = function() { el.classList.remove('speaking'); currentWordEl = null; };
+  utter.onerror = function() { el.classList.remove('speaking'); currentWordEl = null; };
+  synth.speak(utter);
+}
+
+// Speak text for button click
+function speakText(text, btn, gender) {
+  if (synth.speaking) {
+    synth.cancel();
+    if (currentWordEl) currentWordEl.classList.remove('speaking');
+  }
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = 0.85;
+  utter.pitch = 1;
+  // Use gender parameter, or fall back to voice selector, or default to female
+  const selectedGender = gender || document.getElementById('voiceSelect').value || 'female';
+  const v = getEdgeVoice(selectedGender);
+  if (v) utter.voice = v;
+
+  btn.classList.add('playing');
+  btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="7" y="5" width="4" height="14"/><rect x="13" y="5" width="4" height="14"/></svg>';
+
+  utter.onend = function() {
+    btn.classList.remove('playing');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+  };
+  utter.onerror = function() {
+    btn.classList.remove('playing');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+  };
+  synth.speak(utter);
+}
+
+// Audio playback (MP3 per expression)
+let currentAudio = null;
+let currentBtn = null;
+let playlist = [];
+let playlistIdx = 0;
+let isPlayingAll = false;
+
+function getSpeed() {
+  return parseFloat(document.getElementById('speedSlider').value);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.getElementById('speedSlider');
+  slider.addEventListener('input', function() {
+    document.getElementById('speedDisplay').textContent = this.value + 'x';
+    if (currentAudio && !currentAudio.paused) {
+      currentAudio.playbackRate = getSpeed();
+    }
+  });
+});
+
+function resetBtn(btn) {
+  if (!btn) return;
+  btn.classList.remove('playing');
+  if (btn.classList.contains('btn-icon')) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+  }
+}
+
+function setBtnPause(btn) {
+  btn.classList.add('playing');
+  if (btn.classList.contains('btn-icon')) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="7" y="5" width="4" height="14"/><rect x="13" y="5" width="4" height="14"/></svg>';
+  }
+}
+
+function playAudio(src, btn) {
+  if (isPlayingAll) stopAll();
+
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    if (currentBtn && currentBtn !== btn) resetBtn(currentBtn);
+    if (currentBtn === btn) {
+      currentAudio = null;
+      currentBtn = null;
+      return;
+    }
+  }
+
+  currentAudio = new Audio(src);
+  currentAudio.playbackRate = getSpeed();
+  currentBtn = btn;
+  setBtnPause(btn);
+  currentAudio.play();
+
+  currentAudio.addEventListener('ended', function() {
+    resetBtn(btn);
+    currentAudio = null;
+    currentBtn = null;
+  });
+}
+
+function visibleBtns() {
+  const active = document.querySelector('.tab-content.active');
+  return active ? active.querySelectorAll('.btn-icon') : [];
+}
+
+function playAll() {
+  if (isPlayingAll) return;
+  isPlayingAll = true;
+  document.getElementById('playAllBtn').disabled = true;
+  document.getElementById('pauseAllBtn').disabled = false;
+  document.getElementById('stopAllBtn').disabled = false;
+
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    if (currentBtn) resetBtn(currentBtn);
+  }
+
+  playlist = [];
+  visibleBtns().forEach(b => playlist.push(b.getAttribute('data-src')));
+  playlistIdx = 0;
+  playNext();
+}
+
+function playNext() {
+  if (!isPlayingAll || playlistIdx >= playlist.length) {
+    stopAll();
+    return;
+  }
+  const src = playlist[playlistIdx];
+  const btns = visibleBtns();
+  const btn = btns[playlistIdx];
+
+  if (currentAudio) {
+    currentAudio.pause();
+    if (currentBtn) resetBtn(currentBtn);
+  }
+
+  currentAudio = new Audio(src);
+  currentAudio.playbackRate = getSpeed();
+  currentBtn = btn;
+  setBtnPause(btn);
+  currentAudio.play();
+
+  currentAudio.addEventListener('ended', function() {
+    resetBtn(btn);
+    playlistIdx++;
+    if (isPlayingAll && playlistIdx < playlist.length) {
+      playNext();
+    } else {
+      stopAll();
+    }
+  });
+}
+
+function pauseAll() {
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+  }
+  document.getElementById('pauseAllBtn').disabled = true;
+  document.getElementById('playAllBtn').disabled = false;
+  document.getElementById('playAllBtn').innerHTML = '<svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg> Resume';
+}
+
+function stopAll() {
+  isPlayingAll = false;
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  if (currentBtn) {
+    resetBtn(currentBtn);
+    currentBtn = null;
+  }
+  document.getElementById('playAllBtn').disabled = false;
+  document.getElementById('playAllBtn').innerHTML = '<svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg> Play All';
+  document.getElementById('pauseAllBtn').disabled = true;
+  document.getElementById('stopAllBtn').disabled = true;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initTranslations();
+  if (synth.getVoices().length) initWordClick();
+  else synth.addEventListener('voiceschanged', initWordClick, { once: true });
+});
+
+</script>
+
+</body>
+</html>
