@@ -2,7 +2,8 @@
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#3d8a4f">
     <title>LAN3107 Essential Workplace Communication: Effective Oral Interaction</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -371,29 +372,29 @@
             display: inline;
         }
 
-        .word-wrap .word {
+        .script-text .word {
             display: inline-block;
             position: relative;
             transition: color 0.15s;
             cursor: pointer;
         }
 
-        .word-wrap .word:hover {
+        .script-text .word:hover {
             background: rgba(122, 158, 126, 0.15);
             border-radius: 4px;
         }
 
-        .word-wrap .word.speaking {
+        .script-text .word.speaking {
             color: #c0392b;
             font-weight: 700;
         }
 
-        .word-wrap .word.active {
+        .script-text .word.active {
             color: #2d6a4f;
             font-weight: 700;
         }
 
-        .word-wrap .word.active::after {
+        .script-text .word.active::after {
             content: '';
             position: absolute;
             bottom: -2px;
@@ -487,13 +488,13 @@
 
         /* Speaker button */
         .speaker-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             border: none;
             cursor: pointer;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 13px;
             font-family: 'Playfair Display', serif;
             transition: all 0.2s ease;
             flex-shrink: 0;
@@ -778,7 +779,7 @@
         .video-placeholder .vp-title { font-size: 18px; font-weight: 600; color: var(--earth); margin-bottom: 6px; }
 
         /* ---- Possible Response: dialogue table with communicative functions ---- */
-        .dialogue-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 6px 0 24px; }
+        .dialogue-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; margin: 6px 0 24px; }
         .dialogue-table th {
             background: #1a4a2e; color: #fff; padding: 10px 12px; text-align: left;
             font-size: 13px; font-weight: 600;
@@ -789,14 +790,30 @@
         .dialogue-table tr.script-row:last-child { border-bottom: none; }
         .dialogue-table tr.script-row:hover { background: #f3f7f1; }
         .dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 var(--sage); }
-        .c-stu { width: 52px; padding: 10px 4px; text-align: center; }
-        .c-script { width: 52%; line-height: 1.9; }
-        .c-fn { width: 27%; font-size: 12px; line-height: 1.6; }
+        .c-stu { width: 28px; min-width: 28px; padding: 6px 1px; text-align: center; }
+        .c-script { width: 34.7%; line-height: 1.9; }
+        .c-fn { width: calc(65.3% - 28px); font-size: 12px; line-height: 1.6; }
         .fn-label { font-style: italic; color: #4a6c8f; font-weight: 600; margin-bottom: 6px; white-space: pre-line; }
         .muted { color: #aab7cc; }
 
+        .dialogue-table mark.lang-hl { cursor: default; }
+        .explain-marker {
+            display: inline-flex; align-items: center; justify-content: center; vertical-align: super;
+            width: 20px; height: 20px; margin: 0 2px 0 5px; padding: 0; border-radius: 50%;
+            border: 1px solid #52675a; background: #fff; color: #253b30; font: 700 11px/1 sans-serif;
+            cursor: help;
+        }
+        .explain-marker:hover, .explain-marker:focus-visible { background: #253b30; color: #fff; outline: 2px solid #a3b18a; outline-offset: 2px; }
+        .language-tooltip {
+            position: fixed; z-index: 1000; max-width: min(360px, calc(100vw - 24px));
+            padding: 11px 14px; border-radius: 12px; background: #253b30; color: #fff;
+            font: 500 13px/1.5 'DM Sans', sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            pointer-events: none;
+        }
+        .language-tooltip[hidden] { display: none; }
+
         .lang-hl {
-            cursor: help; padding: 2px 6px; border-radius: 5px; font-weight: 600;
+            cursor: default; padding: 2px 4px; border-radius: 5px; font-weight: 600;
             text-decoration: none;
         }
         .lang-hl.m { background: #dbeafe; color: #1e40af; border: 2px solid #3b82f6; }
@@ -814,7 +831,10 @@
         .lang-hl.ex { background: #cffafe; color: #155e75; border: 2px solid #06b6d4; }
         .lang-hl.pref { background: #fef3c7; color: #78350f; border: 2px solid #d97706; }
         .lang-hl.lex { background: #f1f5f9; color: #334155; border: 2px solid #94a3b8; }
+        .lang-hl.coll { background: #ccfbf1; color: #115e59; border: 2px solid #14b8a6; }
+        .lang-hl.form { background: #e0e7ff; color: #3730a3; border: 2px solid #818cf8; }
         .lang-hl .lang-hl { padding: 1px 4px; margin: 0 1px; box-shadow: 0 0 0 1.5px #fff; }
+        @media (max-width: 640px) { .explain-marker { width: 24px; height: 24px; margin-left: 6px; font-size: 12px; } }
         .exp-plain { font-size: 12px; color: #64748b; font-style: italic; display: inline-block; margin: 2px 4px 2px 0; }
 
         .exp-item {
@@ -833,10 +853,18 @@
         .exp-item.resp { background: #e5e5e5; color: #525252; border: 1px solid #d4d4d4; }
         .exp-item.ex { background: #cffafe; color: #155e75; border: 1px solid #22d3ee; }
         .exp-item.pref { background: #fef3c7; color: #78350f; border: 1px solid #fbbf24; }
+        .exp-item.lex { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .exp-item.coll { background: #ccfbf1; color: #115e59; border: 1px solid #5eead4; }
+        .exp-item.form { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
 
         .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; align-items: center; }
         .legend .lbl { font-size: 13px; font-weight: 700; color: var(--earth); margin-right: 4px; }
         .legend .chip { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+        .tab2-guide {
+            margin: 18px 0 12px; padding: 12px 16px; border-left: 4px solid var(--sage);
+            border-radius: 8px; background: #f3f7f1; color: var(--earth); font-size: 13px; line-height: 1.65;
+        }
+        .tab2-guide strong { color: #31583a; }
         .chip.m { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
         .chip.c { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
         .chip.h { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
@@ -848,10 +876,54 @@
         .chip.p { background: #fce7f3; color: #9d174d; border: 1px solid #f9a8d4; }
         .chip.ex { background: #cffafe; color: #155e75; border: 1px solid #22d3ee; }
         .chip.pref { background: #fef3c7; color: #78350f; border: 1px solid #fbbf24; }
+        .chip.lex { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .chip.coll { background: #ccfbf1; color: #115e59; border: 1px solid #5eead4; }
+        .chip.form { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
         .chip.resp { background: #e5e5e5; color: #525252; border: 1px solid #d4d4d4; }
 
         .dialogue-table .script-text { font-size: 15px; }
         .dialogue-table .c-script .cn-translation { font-size: 13px; }
+        @media (max-width: 820px) {
+            #dialogueBody { overflow: visible; }
+            #dialogueBody .dialogue-table { display: block; width: 100%; min-width: 0; table-layout: auto; }
+            .dialogue-table thead {
+                position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+            }
+            .dialogue-table tbody { display: block; width: 100%; }
+            .dialogue-table tr.script-row {
+                display: grid; grid-template-columns: 48px minmax(0, 1fr);
+                grid-template-areas: "speaker script" "function function";
+                width: 100%; margin: 0 0 12px; padding: 0; gap: 0;
+                border: 1px solid var(--divider); border-radius: 12px; overflow: hidden;
+                background: #fff; box-shadow: 0 2px 8px rgba(35, 59, 48, 0.06);
+            }
+            .dialogue-table tr.script-row:hover { background: #fff; }
+            .dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 var(--sage); }
+            .dialogue-table td { display: block; min-width: 0; border: 0; padding: 10px 12px; }
+            .dialogue-table .c-stu {
+                grid-area: speaker; width: auto; min-width: 0; padding: 12px 2px 8px 8px;
+                text-align: center; align-self: start;
+            }
+            .dialogue-table .c-stu::before,
+            .dialogue-table .c-script::before,
+            .dialogue-table .c-fn::before {
+                display: block; margin: 0 0 5px; color: #607267; font: 700 10px/1.3 'DM Sans', sans-serif;
+                letter-spacing: .04em; text-transform: uppercase;
+            }
+            .dialogue-table .c-stu::before { content: "Speaker"; }
+            .dialogue-table .c-script { grid-area: script; width: auto; padding: 12px 12px 10px 8px; line-height: 1.75; overflow-wrap: anywhere; }
+            .dialogue-table .c-script::before { content: "Conversation"; }
+            .dialogue-table .c-script .script-text { font-size: 14px; }
+            .dialogue-table .c-fn {
+                grid-area: function; width: auto; padding: 9px 12px 11px;
+                border-top: 1px solid var(--divider); background: #f7faf5; font-size: 12px;
+            }
+            .dialogue-table tbody tr:nth-child(even) .c-fn { background: #f2f6ef; }
+            .dialogue-table .c-fn::before { content: "Communicative function"; }
+            .dialogue-table .c-fn .fn-label { margin: 0; }
+            .dialogue-table .c-script .cn-translation { font-size: 12px; }
+        }
 
         /* ---- Supplementary: language features & communicative functions ---- */
         .supp-notes { margin-top: 6px; }
@@ -942,6 +1014,129 @@
         .fn-highlight-text strong {
             color: var(--earth);
         }
+
+        /* ====================================================================
+           RESPONSIVE LAYER  (phone / tablet / laptop / large desktop)
+           ==================================================================== */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        button, select, .speaker-btn, .tab-btn, .explain-marker { touch-action: manipulation; }
+        img, video { max-width: 100%; }
+        h1, .script-text, .fn-label { overflow-wrap: anywhere; }
+
+        /* ---------- Dialogue table column widths (desktop / laptop / wide tablet) ----------
+           Fixed table layout reads widths from the header row, so they are set on the <th>s.
+           Narrow speaker column | wide conversation column | medium functions column */
+        .dialogue-table th:nth-child(1), .c-stu    { width: 64px; min-width: 64px; }
+        .dialogue-table th:nth-child(2), .c-script { width: 56%; }
+        .dialogue-table th:nth-child(3), .c-fn     { width: auto; }
+        .dialogue-table td.c-script { padding-right: 16px; }
+
+        /* ---------- Laptop / desktop: use the extra width for the 3-column table ---------- */
+        @media (min-width: 1100px) { .page-wrapper { max-width: 980px; } }
+        @media (min-width: 1500px) { .page-wrapper { max-width: 1100px; } }
+
+        /* ---------- Tablet & below (<= 900px) ---------- */
+        @media (max-width: 900px) {
+            .page-wrapper { padding: 36px 18px 40px; }
+            .hero-banner { max-width: 100%; padding: 32px 28px; }
+            .playback-controls { flex-wrap: wrap; }
+
+            /* Card layout (defined above): roomier speaker column + finger-size buttons */
+            .dialogue-table tr.script-row { grid-template-columns: 58px minmax(0, 1fr); }
+            .dialogue-table .c-stu { padding: 12px 2px 8px 10px; }
+            .dialogue-table .speaker-btn { width: 42px; height: 42px; }
+
+            /* Keep the line being played visible while the page scrolls */
+            .now-playing.active {
+                position: sticky;
+                top: calc(env(safe-area-inset-top, 0px) + 8px);
+                z-index: 50;
+                max-height: 30vh;
+                overflow-y: auto;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+            }
+            .now-playing-text { font-size: 16px; }
+        }
+
+        /* ---------- Phones (<= 640px) ---------- */
+        @media (max-width: 640px) {
+            .page-wrapper { padding: 16px 12px 32px; }
+
+            .tab-bar {
+                gap: 4px; margin-bottom: 20px;
+                overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+            }
+            .tab-bar::-webkit-scrollbar { display: none; }
+            .tab-btn { flex: 1 0 auto; padding: 12px 14px; font-size: 13px; min-height: 44px; white-space: nowrap; }
+
+            .banner { border-radius: 14px; margin-bottom: 18px; }
+            .header { margin-bottom: 28px; }
+            .header-eyebrow { font-size: 11px; letter-spacing: 0.12em; gap: 8px; line-height: 1.5; margin-bottom: 12px; }
+            .header-eyebrow::before, .header-eyebrow::after { width: 18px; flex: 0 0 18px; }
+            .presenter-tag { font-size: 14px; }
+            .cn-toggle-wrap { text-align: center; margin: 8px 0 14px; }
+            .cn-toggle { min-height: 44px; font-size: 15px; }
+
+            .hero-banner { padding: 24px 18px; border-radius: 16px; margin-bottom: 26px; }
+            .hero-banner h2 { font-size: 22px; }
+            .hero-banner p { font-size: 14px; }
+            .agenda-chips { gap: 6px; margin-top: 16px; }
+            .agenda-chips .chip { font-size: 11.5px; padding: 4px 11px; }
+
+            .tab2-guide { padding: 10px 12px; font-size: 12.5px; }
+            .legend { gap: 6px; }
+
+            /* Play All / Pause / Stop in one row, Speed underneath */
+            .playback-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 12px; }
+            .playback-controls button { min-height: 44px; padding: 8px 6px; font-size: 13px; }
+            .speed-label { grid-column: 1 / 2; margin-left: 0; align-self: center; }
+            .speed-select { grid-column: 2 / 4; min-height: 40px; font-size: 15px; }
+
+            .now-playing { padding: 12px 14px; }
+
+            .task-section h2 { font-size: 18px; }
+            .task-box { padding: 12px 14px; }
+            .meeting-meta { padding: 12px 14px; }
+            .meeting-meta .m-university { font-size: 20px; }
+
+            .note-block, .cf-card { padding: 12px 14px; }
+            .summary-card { padding: 22px 18px; margin-top: 28px; border-radius: 16px; }
+            .summary-card h3 { font-size: 20px; margin-bottom: 14px; }
+
+            /* Videos: one per row instead of a 2 x 2 grid */
+            #tab-video > div:first-child { grid-template-columns: 1fr !important; gap: 14px !important; }
+        }
+
+        /* ---------- Very small phones ---------- */
+        @media (max-width: 380px) {
+            .tab-btn { padding: 10px 10px; font-size: 12px; }
+            .page-wrapper { padding-left: 8px; padding-right: 8px; }
+            .dialogue-table .c-script .script-text { font-size: 13.5px; }
+        }
+
+        /* ---------- Touch screens: easier-to-hit explanation markers ---------- */
+        @media (hover: none) {
+            .explain-marker { width: 26px; height: 26px; margin: 0 3px 0 6px; font-size: 12px; }
+            .script-text .word { padding: 0 1px; }
+        }
+
+        /* ---------- Reduced motion ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+
+        /* ---------- Print ---------- */
+        @media print {
+            body::before, .tab-bar, .playback-controls, .now-playing, .speaker-btn, .cn-toggle-wrap { display: none !important; }
+            .tab-content { display: block !important; }
+            .dialogue-table tr, .cf-card, .note-block { break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -981,6 +1176,10 @@
         </div>
     </div>
 
+    <div class="tab2-guide" aria-label="How to use this tab">
+        <strong>How to use this tab:</strong> Choose <em>Play All</em> or a speaker button to hear the dialogue; use <em>Pause</em>, <em>Stop</em> and the speed menu to control playback. Hover over a numbered marker for its language note, or focus/tap the marker. Hover over a word to hear its pronunciation; tap a word on a touch screen. Word pronunciation pauses script audio. Use the colour key and the third column to review communicative functions, and switch on <em>中文翻译</em> to show the translations. On a phone or small tablet, each turn is shown as a card, so no sideways scrolling is needed.
+    </div>
+
     <div class="playback-controls">
         <button class="play-all-btn" onclick="playAll()">▶ Play All</button>
         <button class="pause-btn" onclick="pausePlay()">⏸ Pause</button>
@@ -1015,6 +1214,9 @@
         <span class="chip ex">Giving examples</span>
         <span class="chip pref">Expressing preference</span>
         <span class="chip resp">Asking for response</span>
+        <span class="chip coll">Collocation / verb pattern</span>
+        <span class="chip lex">Phrasal verb</span>
+        <span class="chip form">Grammar / expression pattern</span>
     </div>
 
     <div id="dialogueBody"></div>
@@ -1232,6 +1434,8 @@
 
 </div>
 
+<div id="languageTooltip" class="language-tooltip" role="tooltip" hidden></div>
+
 <script>
     let currentAudio = null;
     let currentBtn = null;
@@ -1245,11 +1449,155 @@
         document.getElementById('tab-' + name).classList.add('active');
     }
 
+    function initLanguageTooltips() {
+        const dialogue = document.getElementById('dialogueBody');
+        const tooltip = document.getElementById('languageTooltip');
+        let activeMark = null;
+        let pinned = false;
+        let lastPointerType = 'mouse';
+
+        function positionTooltip(mark) {
+            tooltip.textContent = mark.dataset.explanation;
+            tooltip.hidden = false;
+            const phrase = mark.getBoundingClientRect();
+            const bubble = tooltip.getBoundingClientRect();
+            const left = Math.max(12, Math.min(phrase.left + phrase.width / 2 - bubble.width / 2, window.innerWidth - bubble.width - 12));
+            let top = phrase.top - bubble.height - 10;
+            if (top < 8) top = phrase.bottom + 10;
+            if (top + bubble.height > window.innerHeight - 8) top = Math.max(8, window.innerHeight - bubble.height - 8);
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        function showTooltip(mark, keepOpen) {
+            if (!mark || !mark.dataset.explanation) return;
+            if (activeMark && activeMark !== mark) activeMark.removeAttribute('aria-describedby');
+            activeMark = mark;
+            pinned = Boolean(keepOpen);
+            mark.setAttribute('aria-describedby', 'languageTooltip');
+            positionTooltip(mark);
+        }
+
+        function hideTooltip() {
+            if (activeMark) activeMark.removeAttribute('aria-describedby');
+            activeMark = null;
+            pinned = false;
+            tooltip.hidden = true;
+        }
+
+        dialogue.addEventListener('pointerover', event => {
+            lastPointerType = event.pointerType || 'mouse';
+            if (lastPointerType === 'touch') return;
+            const mark = event.target.closest('.explain-marker[data-explanation]');
+            if (mark && dialogue.contains(mark)) showTooltip(mark, false);
+        });
+
+        dialogue.addEventListener('pointerout', event => {
+            if (lastPointerType === 'touch' || pinned) return;
+            const mark = event.target.closest('.explain-marker[data-explanation]');
+            if (mark && dialogue.contains(mark) && !mark.contains(event.relatedTarget)) hideTooltip();
+        });
+
+        dialogue.addEventListener('focusin', event => {
+            const mark = event.target.closest('.explain-marker[data-explanation]');
+            if (mark && dialogue.contains(mark)) showTooltip(mark, false);
+        });
+
+        dialogue.addEventListener('focusout', () => {
+            if (!pinned) hideTooltip();
+        });
+
+        dialogue.addEventListener('pointerdown', event => {
+            lastPointerType = event.pointerType || 'mouse';
+        });
+
+        dialogue.addEventListener('click', event => {
+            const mark = event.target.closest('.explain-marker[data-explanation]');
+            if (!mark || !dialogue.contains(mark)) {
+                if (lastPointerType === 'touch') hideTooltip();
+                return;
+            }
+            if (lastPointerType === 'touch') {
+                if (activeMark === mark && pinned) hideTooltip();
+                else showTooltip(mark, true);
+            }
+        });
+
+        document.addEventListener('pointerdown', event => {
+            if (activeMark && !activeMark.contains(event.target) && !tooltip.contains(event.target)) hideTooltip();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && activeMark) hideTooltip();
+        });
+
+        window.addEventListener('resize', () => {
+            if (activeMark) positionTooltip(activeMark);
+        });
+        window.addEventListener('scroll', () => {
+            if (activeMark) positionTooltip(activeMark);
+        }, true);
+    }
+
     const pronunciationMap = {
         'TikTok': 'Tick Tock',
         'TikTok.': 'Tick Tock.',
         'TikTok,': 'Tick Tock,',
     };
+
+    let hoverSpeakTimer = null;
+
+    function preferredEnglishVoice() {
+        const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+        const english = voices.filter(v => /^en([-_]|$)/i.test(v.lang || ''));
+        return english.find(v => /natural|neural|premium|enhanced|siri|ava|samantha|serena|daniel/i.test(v.name))
+            || english.find(v => /google|microsoft|apple/i.test(v.name))
+            || english.find(v => /en[-_]US/i.test(v.lang))
+            || english[0] || null;
+    }
+
+    function speakHoveredWord(wordEl) {
+        clearTimeout(hoverSpeakTimer);
+        hoverSpeakTimer = setTimeout(() => {
+            const raw = wordEl.dataset.word || wordEl.textContent;
+            const word = raw.replace(/^[^A-Za-z0-9']+|[^A-Za-z0-9'’-]+$/g, '');
+            if (!word || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+                if (currentBtn) currentBtn.classList.remove('playing');
+                clearRowActive();
+                clearNowPlaying();
+                clearWordTrack();
+            }
+            speechSynthesis.cancel();
+            document.querySelectorAll('.script-text .word.speaking').forEach(el => el.classList.remove('speaking'));
+            const utterance = new SpeechSynthesisUtterance(pronunciationMap[raw] || pronunciationMap[word] || word);
+            const voice = preferredEnglishVoice();
+            if (voice) utterance.voice = voice;
+            utterance.lang = voice ? voice.lang : 'en-US';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            wordEl.classList.add('speaking');
+            utterance.onend = utterance.onerror = () => wordEl.classList.remove('speaking');
+            speechSynthesis.speak(utterance);
+        }, 280);
+    }
+
+    function initWordPronunciation() {
+        const dialogue = document.getElementById('dialogueBody');
+        dialogue.addEventListener('pointerover', event => {
+            if (event.pointerType === 'touch') return;
+            const word = event.target.closest('.script-text .word');
+            if (word && !word.contains(event.relatedTarget)) speakHoveredWord(word);
+        });
+        dialogue.addEventListener('pointerout', event => {
+            if (event.pointerType !== 'touch' && event.target.closest('.script-text .word')) clearTimeout(hoverSpeakTimer);
+        });
+        dialogue.addEventListener('click', event => {
+            const word = event.target.closest('.script-text .word');
+            if (word) speakHoveredWord(word);
+        });
+    }
 
     function getAllBtns() {
         return [...document.querySelectorAll('.speaker-btn')];
@@ -1297,29 +1645,9 @@
         const textEl = row.querySelector('.script-text');
         if (!textEl) return;
 
-        textEl.dataset.origHtml = textEl.innerHTML;
-        const text = textEl.textContent.trim();
-        const words = text.split(/\s+/);
-        const wordWrap = document.createElement('span');
-        wordWrap.className = 'word-wrap';
-        wordWrap.innerHTML = words.map(w => '<span class="word">' + w + '</span>').join(' ');
-        textEl.innerHTML = '';
-        textEl.appendChild(wordWrap);
         const wordSpans = textEl.querySelectorAll('.word');
-
-        wordSpans.forEach(span => {
-            span.addEventListener('click', function(e) {
-                e.stopPropagation();
-                let word = this.textContent;
-                const said = pronunciationMap[word] || word;
-                const utt = new SpeechSynthesisUtterance(said);
-                utt.rate = 0.85;
-                this.classList.add('speaking');
-                utt.onend = () => this.classList.remove('speaking');
-                speechSynthesis.cancel();
-                speechSynthesis.speak(utt);
-            });
-        });
+        const words = Array.from(wordSpans);
+        if (!words.length) return;
 
         let lastIdx = -1;
         const handler = () => {
@@ -1337,19 +1665,11 @@
         audio.addEventListener('timeupdate', handler);
         audio.addEventListener('ended', () => {
             audio.removeEventListener('timeupdate', handler);
-            if (textEl.dataset.origHtml !== undefined) {
-                textEl.innerHTML = textEl.dataset.origHtml;
-                delete textEl.dataset.origHtml;
-            }
         }, { once: true });
     }
 
     function clearWordTrack() {
-        document.querySelectorAll('.word-wrap .word.active').forEach(w => w.classList.remove('active'));
-        document.querySelectorAll('.script-text[data-orig-html]').forEach(el => {
-            el.innerHTML = el.dataset.origHtml;
-            delete el.dataset.origHtml;
-        });
+        document.querySelectorAll('.script-text .word.active').forEach(w => w.classList.remove('active'));
     }
 
     function setNowPlaying(btn) {
@@ -1473,54 +1793,58 @@
     const DIALOGUE = [
       { sp: "B", fn: "Greetings. Welcoming participants. Opening the meeting.", t: "Good morning, everyone. Welcome to today's meeting. Shall we start now?", hi: [ { m: "Good morning, everyone. Welcome to today's meeting", l: "yellow", hide: true }, { m: "Shall we", l: "Making suggestions" } ], f: "B1.mp3", cn: "B：各位早安，欢迎出席今天的会议。我们现在开始好吗？" },
       { sp: "All", t: "Yes. (Chorus)", f: "ALL1.mp3", cn: "All：好的。" },
-      { sp: "C", fn: "Checking if the participants have a copy of the agenda.", t: "Does everyone have a copy of the agenda?", hi: [ { m: "Does everyone have", l: "yellow", hide: true } ], f: "C1.mp3", cn: "C：大家都有议程的副本吗？" },
+      { sp: "C", fn: "Checking if the participants have a copy of the agenda.", t: "Does everyone have a copy of the agenda?", hi: [ { m: "Does everyone have", l: "yellow", hide: true } , { m: 'Does everyone have', l: 'Question grammar — everyone is singular, so use does + base verb have.' }], f: "C1.mp3", cn: "C：大家都有议程的副本吗？" },
       { sp: "All", t: "Yes. (Chorus)", f: "ALL2.mp3", cn: "All：有。" },
-      { sp: "D", fn: "Purpose of the meeting", t: "Great! The purpose of today's meeting is to discuss the arrangements for our upcoming workshop, which aims to educate the public about green living.", hi: [ { m: "The purpose of today's meeting is to discuss", l: "yellow", hide: true } ], f: "D1.mp3", cn: "D：太好了！今天会议的目的是讨论我们即将举行的活动安排，该活动旨在教育公众认识绿色生活。" },
-      { sp: "A", fn: "Introducing the agenda", t: "We are going to cover three agenda items: promotional strategies for the workshop; green living tips to cover in the workshop; and any other business that you would like to discuss.", hi: [ { m: "We are going to cover three agenda items", l: "yellow", hide: true }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } ], f: "A1.mp3", cn: "A：我们将讨论三个议程项目：工作坊的宣传策略、工作坊要涵盖的绿色生活贴士，以及你们想讨论的任何其他事项。" },
-      { sp: "C", t: "Let's begin by discussing our promotional strategies for the workshop. I suggest that we consider using social media platforms such as Instagram and Facebook. Since they have a wide reach, I believe they can effectively attract younger audiences, who are generally eco-conscious and interested in tips for green living.", hi: [ { m: "Let's begin", l: "Contraction (Let us begin)" },       { m: "by discussing", l: "Preposition: by + V-ing/(gerund)" },       { m: "I suggest that we consider using", l: "Making suggestions (suggest + that clause/ that+S+V+O)" }, { m: "such as Instagram and Facebook", l: "Giving examples" },       { m: "Since they have a wide reach", l: "Giving reasons: Since (S+V+O), S+V+O" }, { m: "they can effectively attract", l: "Modal verb + bare infinitive" }, { m: "who are generally eco-conscious and interested in tips for green living", l: "Elaborating opinions" } ], f: "C2.mp3", cn: "C：我们先讨论工作坊的宣传策略。我建议考虑使用Instagram和Facebook等社交媒体平台。由于它们覆盖范围广泛，我相信它们能有效吸引较年轻的受众，他们普遍具有环保意识，并对绿色生活贴士感兴趣。" },
-      { sp: "B", t: "I agree. This approach would certainly help us engage people in a cost-effective way. In addition, why don't we collaborate with local eco-friendly influencers? This would allow us to reach their followers and add credibility to our message. Do you see my point?", hi: [ { m: "I agree", l: "Showing agreement" },       { m: "would certainly help", l: "Modal verb + bare infinitive" }, { m: "engage", l: "Phrasal verb: engage someone in something.", hide: true }, { m: "people in a", hl: "in", l: "Phrasal verb: engage someone in something.", plain: true }, { m: "In addition", l: "Cohesive device" }, { m: "why don't we collaborate", l: "Making suggestions (why don't we + V)" }, { m: "would allow us to reach", l: "Modal verb + bare infinitive", hide: true },       { m: "Do you see my point", l: "Asking for response" } ], f: "B2.mp3", cn: "B：我同意。这个方法肯定能帮助我们以具成本效益的方式接触人群。此外，我们何不与本地环保网红合作？这能让我们接触他们的粉丝，并为我们的讯息增添公信力。你们明白我的意思吗？" },
-      { sp: "D", t: "That's a fantastic idea. I would also prefer to use influencer partnerships rather than printed posters or flyers, because influencers can create authentic engagement and reach niche eco-conscious communities more effectively.", hi: [ { m: "That's a fantastic idea", l: "Showing agreement" }, { m: "That's", l: "Contraction (That is)" }, { m: "would also prefer to use", l: "Expressing preference" }, { m: "rather than", l: "Expressing preference", hide: true }, { m: "because influencers can create", l: "Giving reasons: because (S+V+O)" } ], f: "D2.mp3", cn: "D：这是一个很棒的想法。我也较倾向使用网红合作，而非印刷海报或传单，因为网红能创造真实的互动，并更有效地接触具环保意识的特定社群。" },
-      { sp: "A", t: "Yes, that's exactly my point of view. By adopting these strategies, we could reach a broader audience. That said, could we also consider distributing digital flyers at community centres and schools to supplement our online efforts?", hi: [ { m: "that's exactly my point of view", l: "Showing agreement" }, { m: "that's", l: "Contraction (That is)" }, { m: "By adopting", l: "Preposition: by + V-ing/(gerund)" }, { m: "we could reach", l: "Modal verb + bare infinitive" }, { m: "That said", l: "Cohesive device" }, { m: "could we also consider distributing", l: "Making suggestions (could we + V)" } ], f: "A2.mp3", cn: "A：是的，这正是我的看法。透过采用这些策略，我们能接触更广泛的受众。话虽如此，我们可否也考虑在社区中心和学校派发数码传单，以补充我们的网上宣传工作？" },
-      { sp: "C", fn: "Showing disagreement subtly · Making a counter-proposal · Giving reasons", t: "Umm, I'm afraid it might be impractical to rely on digital flyers, as this could create unnecessary digital clutter. Instead, I propose creating short video clips on sustainable living and sharing them on platforms like TikTok and YouTube, which would be more engaging and shareable.", hi: [ { m: "I'm", l: "Contraction (I am)" }, { m: "might be", l: "Modal verb + bare infinitive" },       { m: "as this could create", l: "Giving reasons: as + S+V" }, { m: "I propose creating", l: "Making suggestions (propose + V-ing)" }, { m: "like TikTok and YouTube", l: "Giving examples" } ], f: "C3.mp3", cn: "C：嗯，恐怕依赖数码传单可能不太实际，因为这可能造成不必要的数码垃圾。相反，我建议制作关于可持续生活的短片，并在TikTok和YouTube等平台分享，这样会更具吸引力且更容易分享。" },
-      { sp: "D", fn: "Showing understanding · Making suggestions · Giving reasons", t: "I see what you mean. Building on that, I also think we should avoid traditional approaches such as paid newspaper advertisements, as they are unlikely to be effective nowadays, with most people relying on digital platforms for information.", hi: [       { m: "I see what you mean", l: "yellow", hide: true }, { m: "Building on that", l: "Cohesive device" }, { m: "we should avoid", l: "Modal verb 'should' + verb - to give advice" }, { m: "such as paid newspaper advertisements", l: "Giving examples" }, { m: "as they are unlikely", l: "Giving reasons: as + S+V" } ], f: "D3.mp3", cn: "D：我明白你的意思。在此基础上，我也认为我们应避免传统的方法，例如付费报章广告，因为现今大多数人都依赖数码平台获取资讯，这些广告不太可能有效。" },
-      { sp: "B", fn: "Drawing consensus\nAsking for consensus", t: "OK, so we've heard several suggestions now. It seems that we have a consensus that the workshop should be promoted through social media platforms such as Instagram, Facebook, TikTok, and YouTube, along with collaborating with local eco-friendly influencers to enhance credibility and engagement. Can we all agree that we should present these two options to the management team?", hi: [ { m: "we've heard several suggestions now", l: "Meeting procedures", hide: true }, { m: "we've heard", l: "Contraction (we have heard)" },       { m: "we have a consensus", l: "yellow", hide: true },       { m: "should be promoted", l: "Modal verb + bare infinitive" }, { m: "such as Instagram, Facebook, TikTok, and YouTube", l: "Giving examples" }, { m: "Can we all agree", l: "yellow", hide: true }, { m: "we should present", l: "Modal verb + bare infinitive", hide: true } ], f: "B3.mp3", cn: "B：好的，我们已听取了好几个建议。看来我们已达成共识：工作坊应透过Instagram、Facebook、TikTok和YouTube等社交媒体平台推广，并与本地环保网红合作，以增强公信力和互动。我们是否都同意把这两个方案呈交管理团队？" },
+      { sp: "D", fn: "Purpose of the meeting", t: "Great! The purpose of today's meeting is to discuss the arrangements for our upcoming workshop, which aims to educate the public about green living.", hi: [ { m: "The purpose of today's meeting is to discuss", l: "yellow", hide: true } , { m: "purpose of today's meeting", l: 'Collocation — the purpose of a meeting is to do something.' }, { m: 'upcoming workshop', l: 'Collocation — upcoming means scheduled to happen soon.' }], f: "D1.mp3", cn: "D：太好了！今天会议的目的是讨论我们即将举行的活动安排，该活动旨在教育公众认识绿色生活。" },
+      { sp: "A", fn: "Introducing the agenda", t: "We are going to cover three agenda items: promotional strategies for the workshop; green living tips to cover in the workshop; and any other business that you would like to discuss.", hi: [ { m: "We are going to cover three agenda items", l: "yellow", hide: true }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } , { m: 'We are going to cover three agenda items', l: 'Example sentence — “We are going to cover three agenda items.” Be going to + base verb introduces a plan; cover agenda items means discuss them.' }, { m: 'any other business', l: 'Meeting expression — AOB means additional matters not listed on the agenda.' }], f: "A1.mp3", cn: "A：我们将讨论三个议程项目：工作坊的宣传策略、工作坊要涵盖的绿色生活贴士，以及你们想讨论的任何其他事项。" },
+      { sp: "C", t: "Let's begin by discussing our promotional strategies for the workshop. I suggest that we consider using social media platforms such as Instagram and Facebook. Since they have a wide reach, I believe they can effectively attract younger audiences, who are generally eco-conscious and interested in tips for green living.", hi: [ { m: "Let's begin", l: "Contraction (Let us begin)" },       { m: "by discussing", l: "Preposition: by + V-ing/(gerund)" },       { m: "I suggest that we consider using", l: "Making suggestions (suggest + that clause/ that+S+V+O)" }, { m: "such as Instagram and Facebook", l: "Giving examples" },       { m: "Since they have a wide reach", l: "Giving reasons: Since (S+V+O), S+V+O" }, { m: "they can effectively attract", l: "Modal verb + bare infinitive" }, { m: "who are generally eco-conscious and interested in tips for green living", l: "Elaborating opinions" } , { m: 'social media platforms', l: 'Collocation — the usual phrase for online services such as Instagram.' }, { m: 'wide reach', l: 'Collocation — wide reach means access to a large audience.' }, { m: 'attract younger audiences', l: 'Collocation — attract + audience describes gaining people’s attention.' }, { m: 'interested in tips for green living', l: 'Verb pattern — interested in is followed by a noun or gerund.' }], f: "C2.mp3", cn: "C：我们先讨论工作坊的宣传策略。我建议考虑使用Instagram和Facebook等社交媒体平台。由于它们覆盖范围广泛，我相信它们能有效吸引较年轻的受众，他们普遍具有环保意识，并对绿色生活贴士感兴趣。" },
+      { sp: "B", t: "I agree. This approach would certainly help us engage people in a cost-effective way. In addition, why don't we collaborate with local eco-friendly influencers? This would allow us to reach their followers and add credibility to our message. Do you see my point?", hi: [ { m: "I agree", l: "Showing agreement" },       { m: "would certainly help", l: "Modal verb + bare infinitive" }, { m: "engage people in", l: "Collocation / verb pattern — engage someone in something means involve them in an activity." }, { m: "In addition", l: "Cohesive device" }, { m: "why don't we collaborate", l: "Making suggestions (why don't we + V)" }, { m: "would allow us to reach", l: "Modal verb + bare infinitive", hide: true },       { m: "Do you see my point", l: "Asking for response" }, { m: 'cost-effective way', l: 'Collocation — achieving a useful result without high cost.' }, { m: 'add credibility to our message', l: 'Collocation — add credibility to something means make it more believable.' }], f: "B2.mp3", cn: "B：我同意。这个方法肯定能帮助我们以具成本效益的方式接触人群。此外，我们何不与本地环保网红合作？这能让我们接触他们的粉丝，并为我们的讯息增添公信力。你们明白我的意思吗？" },
+      { sp: "D", t: "That's a fantastic idea. I would also prefer to use influencer partnerships rather than printed posters or flyers, because influencers can create authentic engagement and reach niche eco-conscious communities more effectively.", hi: [ { m: "That's a fantastic idea", l: "Showing agreement" }, { m: "That's", l: "Contraction (That is)" }, { m: "would also prefer to use", l: "Expressing preference" }, { m: "rather than", l: "Expressing preference", hide: true }, { m: "because influencers can create", l: "Giving reasons: because (S+V+O)" } , { m: 'influencer partnerships', l: 'Collocation — a partnership with an influencer to promote a message.' }, { m: 'authentic engagement', l: 'Collocation — genuine interaction with an audience.' }, { m: 'niche eco-conscious communities', l: 'Collocation — niche communities are specific, focused groups.' }], f: "D2.mp3", cn: "D：这是一个很棒的想法。我也较倾向使用网红合作，而非印刷海报或传单，因为网红能创造真实的互动，并更有效地接触具环保意识的特定社群。" },
+      { sp: "A", t: "Yes, that's exactly my point of view. By adopting these strategies, we could reach a broader audience. That said, could we also consider distributing digital flyers at community centres and schools to supplement our online efforts?", hi: [ { m: "that's exactly my point of view", l: "Showing agreement" }, { m: "that's", l: "Contraction (That is)" }, { m: "By adopting", l: "Preposition: by + V-ing/(gerund)" }, { m: "we could reach", l: "Modal verb + bare infinitive" }, { m: "That said", l: "Cohesive device" }, { m: "could we also consider distributing", l: "Making suggestions (could we + V)" } , { m: 'point of view', l: 'Collocation — a person’s opinion or perspective.' }, { m: 'broader audience', l: 'Collocation — a larger or more varied group of people.' }, { m: 'supplement our online efforts', l: 'Collocation — supplement means add something that supports existing work.' }], f: "A2.mp3", cn: "A：是的，这正是我的看法。透过采用这些策略，我们能接触更广泛的受众。话虽如此，我们可否也考虑在社区中心和学校派发数码传单，以补充我们的网上宣传工作？" },
+      { sp: "C", fn: "Showing disagreement subtly · Making a counter-proposal · Giving reasons", t: "Umm, I'm afraid it might be impractical to rely on digital flyers, as this could create unnecessary digital clutter. Instead, I propose creating short video clips on sustainable living and sharing them on platforms like TikTok and YouTube, which would be more engaging and shareable.", hi: [ { m: "I'm", l: "Contraction (I am)" }, { m: "might be", l: "Modal verb + bare infinitive" },       { m: "as this could create", l: "Giving reasons: as + S+V" }, { m: "I propose creating", l: "Making suggestions (propose + V-ing)" }, { m: "like TikTok and YouTube", l: "Giving examples" } , { m: 'rely on digital flyers', l: 'Verb pattern — rely on + noun means depend on that thing.' }, { m: 'digital clutter', l: 'Collocation — an unnecessary build-up of digital content.' }, { m: 'short video clips', l: 'Collocation — short clips are brief video recordings.' }, { m: 'sustainable living', l: 'Collocation — ways of living that reduce environmental harm.' }], f: "C3.mp3", cn: "C：嗯，恐怕依赖数码传单可能不太实际，因为这可能造成不必要的数码垃圾。相反，我建议制作关于可持续生活的短片，并在TikTok和YouTube等平台分享，这样会更具吸引力且更容易分享。" },
+      { sp: "D", fn: "Showing understanding · Making suggestions · Giving reasons", t: "I see what you mean. Building on that, I also think we should avoid traditional approaches such as paid newspaper advertisements, as they are unlikely to be effective nowadays, with most people relying on digital platforms for information.", hi: [       { m: "I see what you mean", l: "yellow", hide: true }, { m: "Building on that", l: "Cohesive device" }, { m: "we should avoid", l: "Modal verb 'should' + verb - to give advice" }, { m: "such as paid newspaper advertisements", l: "Giving examples" }, { m: "as they are unlikely", l: "Giving reasons: as + S+V" } , { m: 'Building on that', l: 'Phrasal verb — build on an idea means develop it further.' }, { m: 'avoid traditional approaches', l: 'Verb pattern — avoid is followed by a noun or gerund, not to + verb.' }, { m: 'relying on digital platforms', l: 'Verb pattern — rely on + noun means depend on it.' }, { m: 'unlikely to be effective', l: 'Adjective pattern — unlikely is followed by to + base verb.' }], f: "D3.mp3", cn: "D：我明白你的意思。在此基础上，我也认为我们应避免传统的方法，例如付费报章广告，因为现今大多数人都依赖数码平台获取资讯，这些广告不太可能有效。" },
+      { sp: "B", fn: "Drawing consensus\nAsking for consensus", t: "OK, so we've heard several suggestions now. It seems that we have a consensus that the workshop should be promoted through social media platforms such as Instagram, Facebook, TikTok, and YouTube, along with collaborating with local eco-friendly influencers to enhance credibility and engagement. Can we all agree that we should present these two options to the management team?", hi: [ { m: "we've heard several suggestions now", l: "Meeting procedures", hide: true }, { m: "we've heard", l: "Contraction (we have heard)" },       { m: "we have a consensus", l: "yellow", hide: true },       { m: "should be promoted", l: "Modal verb + bare infinitive" }, { m: "such as Instagram, Facebook, TikTok, and YouTube", l: "Giving examples" }, { m: "Can we all agree", l: "yellow", hide: true }, { m: "we should present", l: "Modal verb + bare infinitive", hide: true } , { m: 'promoted through social media platforms', l: 'Collocation — promote something through a channel.' }, { m: 'along with collaborating', l: 'Grammar — along with + noun or gerund adds a parallel action.' }, { m: 'enhance credibility and engagement', l: 'Collocation — enhance means improve or strengthen.' }], f: "B3.mp3", cn: "B：好的，我们已听取了好几个建议。看来我们已达成共识：工作坊应透过Instagram、Facebook、TikTok和YouTube等社交媒体平台推广，并与本地环保网红合作，以增强公信力和互动。我们是否都同意把这两个方案呈交管理团队？" },
       { sp: "All", t: "Sure. (Chorus)", f: "ALL3.mp3", cn: "All：当然。" },
-      { sp: "C", fn: "Switching topic", t: "Excellent! Let's move on to the next item on the agenda.", hi: [ { m: "Let's", l: "Contraction (Let us)" }, { m: "Let's move on to the next item on the agenda", l: "Meeting procedures", hide: true } ], f: "C4.mp3", cn: "C：太好了！我们继续讨论议程的下一项。" },
-      { sp: "D", fn: "Inviting opinions", t: "What are your opinions on the green living tips we should highlight in the workshop?", hi: [       { m: "What are your opinions on", l: "yellow", hide: true }, { m: "we should highlight", l: "Modal verb + bare infinitive (should + verb)" } ], f: "D4.mp3", cn: "D：你们对工作坊应重点介绍的绿色生活贴士有何意见？" },
-      { sp: "A", fn: "Making suggestions · Giving reasons", t: "I'd like to suggest making minimising energy consumption a priority. Teaching participants to switch to LED lighting and energy-efficient appliances would be very practical and effective in the long run.", hi: [ { m: "I'd like to suggest making", l: "Making suggestions (suggest + V-ing)" }, { m: "would be very practical", l: "Modal verb + bare infinitive. [Modal verb: would - more positive in tone]" } ], f: "A3.mp3", cn: "A：我想建议把减少能源消耗列为重点。教导参加者改用LED照明和节能电器，长远而言非常实用和有效。" },
-      { sp: "B", fn: "Showing agreement · Making suggestions · Giving reasons", t: "I agree. Energy saving is important. In addition, we could also encourage people to reduce paper usage by switching to digital alternatives, such as e-bills and e-documents, since this can be implemented immediately at little or no cost.", hi: [ { m: "I agree", l: "Showing agreement" }, { m: "In addition", l: "Cohesive device" }, { m: "we could also encourage", l: "Modal verb + bare infinitive" }, { m: "by switching", l: "Preposition: by + V-ing/(gerund)" }, { m: "such as e-bills and e-documents", l: "Giving examples" }, { m: "since this can be implemented", l: "Giving reasons (cohesive device)" } ], f: "B4.mp3", cn: "B：我同意。节能很重要。此外，我们也可以鼓励人们改用数码替代方案（如电子账单和电子文件）来减少用纸，因为这可以即时实施，成本极低甚至零成本。" },
-      { sp: "C", fn: "Making comparisons · Elaborating opinions", t: "Although paper reduction is easier to implement, reducing energy consumption offers greater long-term benefits. The former is low-cost and quickly achievable, whereas the latter focuses on sustained environmental impact. Therefore, I believe both should be highlighted.", hi: [ { m: "The former is low-cost and quickly achievable, whereas the latter focuses on", l: "Elaborating opinions" }, { m: "Although", l: "Cohesive device" }, { m: "whereas", l: "Cohesive device", hide: true }, { m: "Therefore", l: "Cohesive device", hide: true }, { m: "should be highlighted", l: "Modal verb + bare infinitive" } ], f: "C5.mp3", cn: "C：虽然减少用纸较容易实施，但减少能源消耗能带来更大的长远好处。前者成本低且能快速达成，后者则着重持续的环境影响。因此，我认为两者都应重点介绍。" },
-      { sp: "D", fn: "Sharing your views · Making suggestions", t: "In my view, we should encourage the use of public transport, which would further reduce carbon emissions.", hi: [       { m: "we should encourage", l: "Modal verb + bare infinitive" }, { m: "would further reduce", l: "Modal verb + bare infinitive", hide: true } ], f: "D5.mp3", cn: "D：在我看来，我们应鼓励使用公共交通工具，这能进一步减少碳排放。" },
+      { sp: "C", fn: "Switching topic", t: "Excellent! Let's move on to the next item on the agenda.", hi: [ { m: "Let's", l: "Contraction (Let us)" }, { m: "Let's move on to the next item on the agenda", l: "Meeting procedures", hide: true } , { m: 'move on to', l: 'Phrasal verb — move on to means proceed to the next topic or agenda item.' }], f: "C4.mp3", cn: "C：太好了！我们继续讨论议程的下一项。" },
+      { sp: "D", fn: "Inviting opinions", t: "What are your opinions on the green living tips we should highlight in the workshop?", hi: [       { m: "What are your opinions on", l: "yellow", hide: true }, { m: "we should highlight", l: "Modal verb + bare infinitive (should + verb)" } , { m: 'opinions on', l: 'Collocation — we ask for someone’s opinion on a topic.' }, { m: 'green living tips', l: 'Collocation — practical suggestions for living more sustainably.' }], f: "D4.mp3", cn: "D：你们对工作坊应重点介绍的绿色生活贴士有何意见？" },
+      { sp: "A", fn: "Making suggestions · Giving reasons", t: "I'd like to suggest making minimising energy consumption a priority. Teaching participants to switch to LED lighting and energy-efficient appliances would be very practical and effective in the long run.", hi: [ { m: "I'd like to suggest making", l: "Making suggestions (suggest + V-ing)" }, { m: "would be very practical", l: "Modal verb + bare infinitive. [Modal verb: would - more positive in tone]" } , { m: 'minimising energy consumption', l: 'Collocation — energy consumption means the amount of energy used.' }, { m: 'switch to LED lighting', l: 'Verb pattern — switch to + noun names the new option.' }, { m: 'in the long run', l: 'Time expression — over a long period of time.' }], f: "A3.mp3", cn: "A：我想建议把减少能源消耗列为重点。教导参加者改用LED照明和节能电器，长远而言非常实用和有效。" },
+      { sp: "B", fn: "Showing agreement · Making suggestions · Giving reasons", t: "I agree. Energy saving is important. In addition, we could also encourage people to reduce paper usage by switching to digital alternatives, such as e-bills and e-documents, since this can be implemented immediately at little or no cost.", hi: [ { m: "I agree", l: "Showing agreement" }, { m: "In addition", l: "Cohesive device" }, { m: "we could also encourage", l: "Modal verb + bare infinitive" }, { m: "by switching", l: "Preposition: by + V-ing/(gerund)" }, { m: "such as e-bills and e-documents", l: "Giving examples" }, { m: "since this can be implemented", l: "Giving reasons (cohesive device)" } , { m: 'reduce paper usage', l: 'Collocation — reduce usage means use less of a resource.' }, { m: 'by switching to digital alternatives', l: 'Grammar — by + gerund explains the method.' }, { m: 'at little or no cost', l: 'Collocation — with very low expense or no expense.' }], f: "B4.mp3", cn: "B：我同意。节能很重要。此外，我们也可以鼓励人们改用数码替代方案（如电子账单和电子文件）来减少用纸，因为这可以即时实施，成本极低甚至零成本。" },
+      { sp: "C", fn: "Making comparisons · Elaborating opinions", t: "Although paper reduction is easier to implement, reducing energy consumption offers greater long-term benefits. The former is low-cost and quickly achievable, whereas the latter focuses on sustained environmental impact. Therefore, I believe both should be highlighted.", hi: [ { m: "The former is low-cost and quickly achievable, whereas the latter focuses on", l: "Elaborating opinions" }, { m: "Although", l: "Cohesive device" }, { m: "whereas", l: "Cohesive device", hide: true }, { m: "Therefore", l: "Cohesive device", hide: true }, { m: "should be highlighted", l: "Modal verb + bare infinitive" } , { m: 'The former', l: 'Reference words — former means the first of two things mentioned; latter means the second.' }, { m: 'greater long-term benefits', l: 'Collocation — greater compares the size or importance of benefits over time.' }, { m: 'whereas', l: 'Linker — whereas introduces a contrast between two facts.' }], f: "C5.mp3", cn: "C：虽然减少用纸较容易实施，但减少能源消耗能带来更大的长远好处。前者成本低且能快速达成，后者则着重持续的环境影响。因此，我认为两者都应重点介绍。" },
+      { sp: "D", fn: "Sharing your views · Making suggestions", t: "In my view, we should encourage the use of public transport, which would further reduce carbon emissions.", hi: [       { m: "we should encourage", l: "Modal verb + bare infinitive" }, { m: "would further reduce", l: "Modal verb + bare infinitive", hide: true } , { m: 'In my view', l: 'Opinion phrase — signals that the speaker is giving a personal view.' }, { m: 'public transport', l: 'Collocation — buses, trains and other shared passenger services.' }, { m: 'carbon emissions', l: 'Collocation — gases released into the air, especially from fuel use.' }, { m: 'which would further reduce', l: 'Relative clause — which refers to the preceding idea and adds its likely result.' }], f: "D5.mp3", cn: "D：在我看来，我们应鼓励使用公共交通工具，这能进一步减少碳排放。" },
       { sp: "All", t: "Wonderful. (Chorus)", f: "ALL4.mp3", cn: "All：很好。" },
-      { sp: "B", fn: "Making suggestions · Giving reasons", t: "What if we also add basic water conservation practices, such as fixing leaks and using low-flow fixtures? This could help participants save water and lower their utility bills.", hi: [ { m: "What if we also add", l: "Making suggestions (what if + S + V)" }, { m: "such as fixing leaks and using low-flow fixtures", l: "Giving examples" }, { m: "could help", l: "Modal verb + bare infinitive (could: less direct in tone to express possibility)" }, { m: "This could help participants save water", l: "Meeting procedures", hide: true } ], f: "B5.mp3", cn: "B：如果我们也加入基本的节水方法，例如修理漏水和使用低流量装置呢？这能帮助参加者节约用水，并降低他们的水费账单。" },
-      { sp: "A", fn: "Showing disagreement · Giving reasons", t: "I'm afraid I disagree. Some water-saving measures may involve higher costs, which could discourage certain participants.", hi: [ { m: "I'm", l: "Contraction (I am)" },       { m: "may involve", l: "Modal verb + bare infinitive (may: formal, polite in outlining a suggestion in a respectful way)" }, { m: "could discourage", l: "Modal verb + bare infinitive", hide: true } ], f: "A4.mp3", cn: "A：恐怕我不同意。部分节水措施可能涉及较高成本，这或会令某些参加者却步。" },
-      { sp: "C", fn: "Showing understanding · Elaborating opinions", t: "I see your point. Personally, I think affordability should be a key criterion when selecting our tips, so that everyone can take part regardless of their budget.", hi: [       { m: "I see your point", l: "yellow", hide: true }, { m: "Personally, I think affordability should be a key criterion", l: "Elaborating opinions" }, { m: "should be", l: "Modal verb + bare infinitive" }, { m: "so that everyone can take part", l: "Giving reasons (cohesive device)" } ], f: "C6.mp3", cn: "C：我明白你的观点。个人而言，我认为选择贴士时，负担能力应是关键准则，这样无论预算多少，每个人都能参与。" },
-      { sp: "D", fn: "Showing agreement · Making suggestions", t: "I can't agree with you more. In that case, why don't we combine all four practices—energy saving, paper reduction, public transport, and basic water conservation—while keeping the focus on low-cost and practical actions?", hi: [ { m: "I can't agree with you more", l: "Showing agreement" }, { m: "can't", l: "Contraction (cannot)" }, { m: "In that case", l: "Cohesive device" }, { m: "why don't we combine", l: "Making suggestions (why don't we + V)" } ], f: "D6.mp3", cn: "D：我非常同意。既然如此，我们何不结合全部四种做法——节能、减少用纸、使用公共交通和基本节水——同时把焦点放在低成本而切实可行的行动上？" },
-      { sp: "B", fn: "Drawing consensus (It seems that...: sound positive in tone)", t: "It seems that we can all agree that these four practices should be introduced as green living tips in the workshop?", hi: [ { m: "It seems that we can all agree", l: "Meeting procedures", hide: true },       { m: "we can all agree", l: "Modal verb + bare infinitive" }, { m: "should be introduced", l: "Modal verb + bare infinitive", hide: true } ], f: "B6.mp3", cn: "B：看来我们都同意把这四种做法作为工作坊的绿色生活贴士？" },
+      { sp: "B", fn: "Making suggestions · Giving reasons", t: "What if we also add basic water conservation practices, such as fixing leaks and using low-flow fixtures? This could help participants save water and lower their utility bills.", hi: [ { m: "What if we also add", l: "Making suggestions (what if + S + V)" }, { m: "such as fixing leaks and using low-flow fixtures", l: "Giving examples" }, { m: "could help", l: "Modal verb + bare infinitive (could: less direct in tone to express possibility)" }, { m: "This could help participants save water", l: "Meeting procedures", hide: true } , { m: 'water conservation practices', l: 'Collocation — actions that reduce water use or waste.' }, { m: 'fixing leaks', l: 'Collocation — repair leaks to stop water escaping.' }, { m: 'low-flow fixtures', l: 'Collocation — fittings designed to use less water.' }, { m: 'save water and lower their utility bills', l: 'Collocations — save water and lower bills describe two practical benefits.' }], f: "B5.mp3", cn: "B：如果我们也加入基本的节水方法，例如修理漏水和使用低流量装置呢？这能帮助参加者节约用水，并降低他们的水费账单。" },
+      { sp: "A", fn: "Showing disagreement · Giving reasons", t: "I'm afraid I disagree. Some water-saving measures may involve higher costs, which could discourage certain participants.", hi: [ { m: "I'm", l: "Contraction (I am)" },       { m: "may involve", l: "Modal verb + bare infinitive (may: formal, polite in outlining a suggestion in a respectful way)" }, { m: "could discourage", l: "Modal verb + bare infinitive", hide: true } , { m: "I'm afraid I disagree", l: 'Polite disagreement — I’m afraid softens a direct refusal or disagreement.' }, { m: 'involve higher costs', l: 'Collocation — involve costs means require spending.' }, { m: 'which could discourage certain participants', l: 'Relative clause — which refers to the higher costs and explains a possible effect.' }], f: "A4.mp3", cn: "A：恐怕我不同意。部分节水措施可能涉及较高成本，这或会令某些参加者却步。" },
+      { sp: "C", fn: "Showing understanding · Elaborating opinions", t: "I see your point. Personally, I think affordability should be a key criterion when selecting our tips, so that everyone can take part regardless of their budget.", hi: [       { m: "I see your point", l: "yellow", hide: true }, { m: "Personally, I think affordability should be a key criterion", l: "Elaborating opinions" }, { m: "should be", l: "Modal verb + bare infinitive" }, { m: "so that everyone can take part", l: "Giving reasons (cohesive device)" } , { m: 'affordability should be a key criterion', l: 'Collocation — affordability is the ability to pay; a criterion is a decision standard.' }, { m: 'so that everyone can take part', l: 'Purpose/result clause — so that introduces the intended outcome.' }, { m: 'take part', l: 'Phrasal verb — take part means participate.' }, { m: 'regardless of their budget', l: 'Phrase — regardless of means without being affected by.' }], f: "C6.mp3", cn: "C：我明白你的观点。个人而言，我认为选择贴士时，负担能力应是关键准则，这样无论预算多少，每个人都能参与。" },
+      { sp: "D", fn: "Showing agreement · Making suggestions", t: "I can't agree with you more. In that case, why don't we combine all four practices—energy saving, paper reduction, public transport, and basic water conservation—while keeping the focus on low-cost and practical actions?", hi: [ { m: "I can't agree with you more", l: "Showing agreement" }, { m: "can't", l: "Contraction (cannot)" }, { m: "In that case", l: "Cohesive device" }, { m: "why don't we combine", l: "Making suggestions (why don't we + V)" } , { m: "I can't agree with you more", l: 'Fixed expression — emphatically means I completely agree.' }, { m: 'In that case', l: 'Linking phrase — connects the response to the situation just described.' }, { m: 'keeping the focus on', l: 'Collocation — keep the focus on means continue giving attention to.' }, { m: 'low-cost and practical actions', l: 'Collocation — actions that are inexpensive and workable.' }], f: "D6.mp3", cn: "D：我非常同意。既然如此，我们何不结合全部四种做法——节能、减少用纸、使用公共交通和基本节水——同时把焦点放在低成本而切实可行的行动上？" },
+      { sp: "B", fn: "Drawing consensus (It seems that...: sound positive in tone)", t: "It seems that we can all agree that these four practices should be introduced as green living tips in the workshop?", hi: [ { m: "It seems that we can all agree", l: "Meeting procedures", hide: true },       { m: "we can all agree", l: "Modal verb + bare infinitive" }, { m: "should be introduced", l: "Modal verb + bare infinitive", hide: true } , { m: 'It seems that', l: 'Hedging phrase — presents a conclusion cautiously and leaves room for response.' }, { m: 'should be introduced', l: 'Modal passive — should + be + past participle focuses on the recommended action.' }], f: "B6.mp3", cn: "B：看来我们都同意把这四种做法作为工作坊的绿色生活贴士？" },
       { sp: "All", t: "Yes. (Chorus)", f: "ALL5.mp3", cn: "All：是的。" },
-      { sp: "A", fn: "Drawing consensus", t: "And can we also agree that we should prepare clear examples and supporting materials for each of these practices?", hi: [ { m: "can we also agree", l: "Meeting procedures", hide: true }, { m: "we should prepare", l: "Modal verb + bare infinitive" } ], f: "A5.mp3", cn: "A：我们是否也同意为每种做法准备清晰的例子和支援教材？" },
+      { sp: "A", fn: "Drawing consensus", t: "And can we also agree that we should prepare clear examples and supporting materials for each of these practices?", hi: [ { m: "can we also agree", l: "Meeting procedures", hide: true }, { m: "we should prepare", l: "Modal verb + bare infinitive" } , { m: 'agree that we should prepare', l: 'Grammar — agree that + clause states the decision being checked.' }, { m: 'supporting materials', l: 'Collocation — extra resources that help explain or teach a point.' }], f: "A5.mp3", cn: "A：我们是否也同意为每种做法准备清晰的例子和支援教材？" },
       { sp: "All", t: "Sure. (Chorus)", f: "ALL6.mp3", cn: "All：当然。" },
-      { sp: "B", fn: "Inviting AOB", t: "Fantastic! Does anyone have any other business you would like to discuss?", hi: [ { m: "Does anyone have any other business", l: "Meeting procedures", hide: true }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } ], f: "B7.mp3", cn: "B：太好了！有没有人想讨论其他事项？" },
-      { sp: "D", fn: "Initiating the discussion · Making suggestions · Giving reasons", t: "Yes, I'd like to discuss souvenirs for participants. I suggest giving them recycled tote bags, because they are reusable, practical, and promote sustainability.", hi: [ { m: "I'd like to discuss", l: "Modal verb + bare infinitive" }, { m: "I suggest giving", l: "Making suggestions (suggest + V-ing)" }, { m: "because they are reusable", l: "Giving reasons (cohesive device)" } ], f: "D7.mp3", cn: "D：有，我想讨论参加者的纪念品。我建议送他们回收再造的手挽袋，因为它们可重用、实用，并能推广可持续性。" },
-      { sp: "B", fn: "Showing agreement · Making suggestions · Drawing consensus", t: "That's a good idea. I also recommend printing our workshop logo and a green living slogan on the bags to reinforce our message. Do we all agree?", hi: [ { m: "That's a good idea", l: "Showing agreement" }, { m: "That's", l: "Contraction (That is)" }, { m: "I also recommend printing", l: "Making suggestions (recommend + V-ing)" }, { m: "Do we all agree", l: "Meeting procedures", hide: true } ], f: "B8.mp3", cn: "B：这是个好主意。我也建议在手挽袋上印上我们工作坊的标志和绿色生活口号，以强化我们的讯息。大家都同意吗？" },
-      { sp: "C", t: "Both of your ideas are sensible, but I'd prefer reusable food wraps as souvenirs. They are more practical in daily life, as they can help reduce plastic waste more directly.", hi: [ { m: "I'd prefer", l: "Modal verb + bare infinitive (I would prefer)" }, { m: "as they can help reduce", l: "Giving reasons (cohesive device)" } ], f: "C7.mp3", cn: "C：你们的意见都很合理，但我较倾向以可重用的食物保鲜布作为纪念品。它们在日常生活中更实用，因为能更直接地减少塑胶废物。" },
-      { sp: "A", fn: "Making comparisons · Elaborating opinions · Drawing consensus", t: "Although recycled tote bags are useful for shopping, reusable food wraps may be more effective in reducing single-use plastic. While tote bags are durable and visible, food wraps are used more frequently, which makes them more environmentally impactful. Therefore, I think both options have their strengths. Shall we all agree on choosing both as souvenirs?", hi: [ { m: "While tote bags are durable and visible, food wraps are used more frequently", l: "Elaborating opinions" }, { m: "Although", l: "Cohesive device" }, { m: "may be more effective", l: "Modal verb + bare infinitive (may: formal, polite and respectful in giving an opinion)" }, { m: "While", l: "Cohesive device", hide: true }, { m: "Therefore", l: "Cohesive device", hide: true },       { m: "Shall we all agree", l: "Modal verb + bare infinitive (shall: seeking advice)" } ], f: "A6.mp3", cn: "A：虽然回收再造的手挽袋对购物有用，但可重用的食物保鲜布在减少一次性塑胶方面可能更有效。手挽袋耐用且显眼，而食物保鲜布使用更频繁，因而更具环境影响力。因此，我认为两个选项各有优点。我们是否都同意两者都选作纪念品？" },
+      { sp: "B", fn: "Inviting AOB", t: "Fantastic! Does anyone have any other business you would like to discuss?", hi: [ { m: "Does anyone have any other business", l: "Meeting procedures", hide: true }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } , { m: 'any other business', l: 'Meeting expression — AOB invites topics outside the listed agenda.' }, { m: 'would like to discuss', l: 'Polite request — would like + to-infinitive sounds less direct than want to.' }], f: "B7.mp3", cn: "B：太好了！有没有人想讨论其他事项？" },
+      { sp: "D", fn: "Initiating the discussion · Making suggestions · Giving reasons", t: "Yes, I'd like to discuss souvenirs for participants. I suggest giving them recycled tote bags, because they are reusable, practical, and promote sustainability.", hi: [ { m: "I'd like to discuss", l: "Modal verb + bare infinitive" }, { m: "I suggest giving", l: "Making suggestions (suggest + V-ing)" }, { m: "because they are reusable", l: "Giving reasons (cohesive device)" } , { m: 'souvenirs for participants', l: 'Collocation — a souvenir is a keepsake given to remember an event.' }, { m: 'suggest giving', l: 'Grammar — suggest is followed by a gerund or a that-clause, not to + verb.' }, { m: 'recycled tote bags', l: 'Collocation — tote bag names a large open bag; recycled describes its material.' }, { m: 'promote sustainability', l: 'Collocation — promote means support or encourage a goal.' }], f: "D7.mp3", cn: "D：有，我想讨论参加者的纪念品。我建议送他们回收再造的手挽袋，因为它们可重用、实用，并能推广可持续性。" },
+      { sp: "B", fn: "Showing agreement · Making suggestions · Drawing consensus", t: "That's a good idea. I also recommend printing our workshop logo and a green living slogan on the bags to reinforce our message. Do we all agree?", hi: [ { m: "That's a good idea", l: "Showing agreement" }, { m: "That's", l: "Contraction (That is)" }, { m: "I also recommend printing", l: "Making suggestions (recommend + V-ing)" }, { m: "Do we all agree", l: "Meeting procedures", hide: true } , { m: 'recommend printing', l: 'Grammar — recommend is followed by a gerund or a that-clause.' }, { m: 'workshop logo and a green living slogan', l: 'Collocations — a logo identifies the event; a slogan is a short memorable message.' }, { m: 'to reinforce our message', l: 'Purpose — to + base verb explains why the logo and slogan are printed.' }], f: "B8.mp3", cn: "B：这是个好主意。我也建议在手挽袋上印上我们工作坊的标志和绿色生活口号，以强化我们的讯息。大家都同意吗？" },
+      { sp: "C", t: "Both of your ideas are sensible, but I'd prefer reusable food wraps as souvenirs. They are more practical in daily life, as they can help reduce plastic waste more directly.", hi: [ { m: "I'd prefer", l: "Modal verb + bare infinitive (I would prefer)" }, { m: "as they can help reduce", l: "Giving reasons (cohesive device)" } , { m: 'more practical in daily life', l: 'Comparative collocation — more + adjective compares usefulness in everyday situations.' }, { m: 'help reduce plastic waste', l: 'Verb pattern — help can be followed by a base verb; reduce describes the intended effect.' }], f: "C7.mp3", cn: "C：你们的意见都很合理，但我较倾向以可重用的食物保鲜布作为纪念品。它们在日常生活中更实用，因为能更直接地减少塑胶废物。" },
+      { sp: "A", fn: "Making comparisons · Elaborating opinions · Drawing consensus", t: "Although recycled tote bags are useful for shopping, reusable food wraps may be more effective in reducing single-use plastic. While tote bags are durable and visible, food wraps are used more frequently, which makes them more environmentally impactful. Therefore, I think both options have their strengths. Shall we all agree on choosing both as souvenirs?", hi: [ { m: "While tote bags are durable and visible, food wraps are used more frequently", l: "Elaborating opinions" }, { m: "Although", l: "Cohesive device" }, { m: "may be more effective", l: "Modal verb + bare infinitive (may: formal, polite and respectful in giving an opinion)" }, { m: "While", l: "Cohesive device", hide: true }, { m: "Therefore", l: "Cohesive device", hide: true },       { m: "Shall we all agree", l: "Modal verb + bare infinitive (shall: seeking advice)" } , { m: 'Although recycled tote bags are useful for shopping', l: 'Concession — although introduces a point accepted before the contrasting claim.' }, { m: 'more frequently', l: 'Comparative adverb — compares how often the two items are used.' }, { m: 'which makes them more environmentally impactful', l: 'Relative clause — which refers to the preceding fact and gives its result.' }], f: "A6.mp3", cn: "A：虽然回收再造的手挽袋对购物有用，但可重用的食物保鲜布在减少一次性塑胶方面可能更有效。手挽袋耐用且显眼，而食物保鲜布使用更频繁，因而更具环境影响力。因此，我认为两个选项各有优点。我们是否都同意两者都选作纪念品？" },
       { sp: "All", t: "Fantastic. (Chorus)", f: "ALL7.mp3", cn: "All：太好了。" },
-      { sp: "A", fn: "Making a counter-proposal · Making suggestions · Giving reasons", t: "However, instead of choosing one over the other, what about offering participants a choice between recycled tote bags and reusable food wraps, so they can select what suits them best?", hi: [ { m: "However", l: "Cohesive device" }, { m: "what about offering", l: "Making suggestions (what about + V-ing)" }, { m: "so they can select", l: "Giving reasons (cohesive device)" } ], f: "A7.mp3", cn: "A：然而，与其二选其一，不如让参加者自行选择回收再造手挽袋或可重用食物保鲜布，这样他们就能选择最适合自己的。" },
-      { sp: "D", t: "I can't agree with you more. Giving participants a choice will make the souvenirs more appealing and ensure they are used more regularly.", hi: [ { m: "I can't agree with you more", l: "Showing agreement" }, { m: "can't", l: "Contraction (cannot)" }, { m: "Giving participants a choice will make the souvenirs more appealing", l: "Elaborating opinions" }, { m: "will make", l: "Modal verb+ bare infinitive (will: strongly positive in tone)" } ], f: "D8.mp3", cn: "D：我非常同意。让参加者有选择权会令纪念品更具吸引力，并确保它们被更常使用。" },
-      { sp: "C", fn: "Drawing consensus · Inviting opinions", t: "Alright. Let's present this idea to management as well. Does anyone have any other suggestions?", hi: [ { m: "Let's", l: "Contraction (Let us)" }, { m: "Let's present this idea to management", l: "Meeting procedures", hide: true }, { m: "Does anyone have any other suggestions", l: "Meeting procedures", hide: true } ], f: "C8.mp3", cn: "C：好的。我们也把这个想法呈交管理层。还有其他建议吗？" },
+      { sp: "A", fn: "Making a counter-proposal · Making suggestions · Giving reasons", t: "However, instead of choosing one over the other, what about offering participants a choice between recycled tote bags and reusable food wraps, so they can select what suits them best?", hi: [ { m: "However", l: "Cohesive device" }, { m: "what about offering", l: "Making suggestions (what about + V-ing)" }, { m: "so they can select", l: "Giving reasons (cohesive device)" } , { m: 'instead of choosing', l: 'Grammar — instead of is followed by a noun or gerund.' }, { m: 'what about offering', l: 'Suggestion pattern — what about + gerund proposes an option.' }, { m: 'a choice between recycled tote bags and reusable food wraps', l: 'Collocation — a choice between names the available alternatives.' }, { m: 'what suits them best', l: 'Relative clause — what means the thing that; suits means is right for someone.' }], f: "A7.mp3", cn: "A：然而，与其二选其一，不如让参加者自行选择回收再造手挽袋或可重用食物保鲜布，这样他们就能选择最适合自己的。" },
+      { sp: "D", t: "I can't agree with you more. Giving participants a choice will make the souvenirs more appealing and ensure they are used more regularly.", hi: [ { m: "I can't agree with you more", l: "Showing agreement" }, { m: "can't", l: "Contraction (cannot)" }, { m: "Giving participants a choice will make the souvenirs more appealing", l: "Elaborating opinions" }, { m: "will make", l: "Modal verb+ bare infinitive (will: strongly positive in tone)" } , { m: 'Giving participants a choice', l: 'Grammar — a gerund phrase can act as the subject of a sentence.' }, { m: 'make the souvenirs more appealing', l: 'Verb pattern — make + object + adjective describes the resulting change.' }, { m: 'ensure they are used more regularly', l: 'Verb pattern — ensure + clause; are used is the present passive.' }], f: "D8.mp3", cn: "D：我非常同意。让参加者有选择权会令纪念品更具吸引力，并确保它们被更常使用。" },
+      { sp: "C", fn: "Drawing consensus · Inviting opinions", t: "Alright. Let's present this idea to management as well. Does anyone have any other suggestions?", hi: [ { m: "Let's", l: "Contraction (Let us)" }, { m: "Let's present this idea to management", l: "Meeting procedures", hide: true }, { m: "Does anyone have any other suggestions", l: "Meeting procedures", hide: true } , { m: 'present this idea to management', l: 'Collocation — present an idea to someone means formally put it forward.' }, { m: 'any other suggestions', l: 'Question phrase — invites further contributions before moving on.' }], f: "C8.mp3", cn: "C：好的。我们也把这个想法呈交管理层。还有其他建议吗？" },
       { sp: "All", t: "Not right now. (Chorus)", f: "ALL8.mp3", cn: "All：暂时没有。" },
-      { sp: "A", fn: "Making a summary", t: "I think we should end our discussion there. To summarise, we've agreed to focus on social media and influencer partnerships for promotion, cover all four green living practices as tips, and offer a choice of eco-friendly souvenirs.", hi: [ { m: "I think we should end our discussion there", l: "Meeting procedures", hide: true },       { m: "we should end", l: "Modal verb + bare infinitive", hide: true }, { m: "To summarise", l: "Meeting procedures", hide: true }, { m: "we've agreed", l: "Contraction (we have agreed)" } ], f: "A8.mp3", cn: "A：我想我们应该在这里结束讨论。总结而言，我们同意以社交媒体和网红合作作为宣传重点，涵盖全部四种绿色生活做法作为贴士，并提供环保纪念品供选择。" },
-      { sp: "D", fn: "Winding up", t: "Well, I think that's all we have time for today. We have some really great ideas to take to management. Does anybody have anything else to add?", hi: [ { m: "that's", l: "Contraction (That is)" }, { m: "that's all we have time for today", l: "Meeting procedures", hide: true }, { m: "Does anybody have anything else to add", l: "Meeting procedures", hide: true } ], f: "D9.mp3", cn: "D：嗯，我想今天的时间差不多了。我们有一些很棒的想法可以呈交管理层。还有没有其他事项要补充？" },
+      { sp: "A", fn: "Making a summary", t: "I think we should end our discussion there. To summarise, we've agreed to focus on social media and influencer partnerships for promotion, cover all four green living practices as tips, and offer a choice of eco-friendly souvenirs.", hi: [ { m: "I think we should end our discussion there", l: "Meeting procedures", hide: true },       { m: "we should end", l: "Modal verb + bare infinitive", hide: true }, { m: "To summarise", l: "Meeting procedures", hide: true }, { m: "we've agreed", l: "Contraction (we have agreed)" } , { m: 'To summarise', l: 'Signpost — introduces a brief account of the decisions made.' }, { m: "we've agreed", l: 'Present perfect — records a decision reached by the group up to now.' }, { m: 'focus on social media', l: 'Collocation — focus on means give special attention to.' }, { m: 'cover all four green living practices as tips, and offer a choice', l: 'Parallel verbs — cover and offer share the same grammatical form in the list.' }], f: "A8.mp3", cn: "A：我想我们应该在这里结束讨论。总结而言，我们同意以社交媒体和网红合作作为宣传重点，涵盖全部四种绿色生活做法作为贴士，并提供环保纪念品供选择。" },
+      { sp: "D", fn: "Winding up", t: "Well, I think that's all we have time for today. We have some really great ideas to take to management. Does anybody have anything else to add?", hi: [ { m: "that's", l: "Contraction (That is)" }, { m: "that's all we have time for today", l: "Meeting procedures", hide: true }, { m: "Does anybody have anything else to add", l: "Meeting procedures", hide: true } , { m: 'all we have time for today', l: 'Expression — marks the limit of the time available.' }, { m: 'ideas to take to management', l: 'Collocation — take an idea to management means present it for consideration.' }, { m: 'anything else to add', l: 'Question phrase — gives participants a final chance to contribute.' }], f: "D9.mp3", cn: "D：嗯，我想今天的时间差不多了。我们有一些很棒的想法可以呈交管理层。还有没有其他事项要补充？" },
       { sp: "All", t: "No. (Chorus)", f: "ALL9.mp3", cn: "All：没有。" },
-      { sp: "B", fn: "Closing the meeting", t: "Well, if nobody has anything else to add, I think we can finish here. Thank you very much for attending the meeting and making contributions, everybody.", hi: [ { m: "if nobody has anything else to add", l: "Meeting procedures", hide: true }, { m: "I think we can finish here", l: "Meeting procedures", hide: true },       { m: "can finish", l: "Modal verb+ bare infinitive (can: something is possible -> a positive tone)" }, { m: "Thank you very much for attending the meeting and making contributions", l: "Meeting procedures", hide: true } ], f: "B9.mp3", cn: "B：那么，如果没有其他事项要补充，我想我们可以结束会议了。非常感谢大家出席会议并作出贡献。" }
+      { sp: "B", fn: "Closing the meeting", t: "Well, if nobody has anything else to add, I think we can finish here. Thank you very much for attending the meeting and making contributions, everybody.", hi: [ { m: "if nobody has anything else to add", l: "Meeting procedures", hide: true }, { m: "I think we can finish here", l: "Meeting procedures", hide: true },       { m: "can finish", l: "Modal verb+ bare infinitive (can: something is possible -> a positive tone)" }, { m: "Thank you very much for attending the meeting and making contributions", l: "Meeting procedures", hide: true } , { m: 'if nobody has anything else to add', l: 'Conditional clause — if + present tense introduces the condition for ending.' }, { m: 'can finish here', l: 'Modal + base verb — can expresses that ending now is possible.' }, { m: 'for attending the meeting', l: 'Grammar — after the preposition for, use a gerund.' }, { m: 'making contributions', l: 'Collocation — make a contribution means offer an idea or help.' }], f: "B9.mp3", cn: "B：那么，如果没有其他事项要补充，我想我们可以结束会议了。非常感谢大家出席会议并作出贡献。" }
     ];
 
+    let languageTagNumber = 0;
+
     function renderDialogue() {
-        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        languageTagNumber = 0;
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
         function colorOf(label) {
             if (/contraction/i.test(label)) return 'c';
             if (/phrasal verb/i.test(label)) return 'lex';
+            if (/collocation|verb pattern/i.test(label)) return 'coll';
             if (/modal/i.test(label)) return 'm';
             if (/giving reasons|since \(s\+v\+o\)|reason/i.test(label)) return 'r';
             if (/suggest|propose|recommend|how about|what about|what if/i.test(label)) return 'g';
@@ -1534,11 +1858,15 @@
             if (/asking for response/i.test(label)) return 'resp';
             if (/giving examples/i.test(label)) return 'ex';
             if (/expressing preference/i.test(label)) return 'pref';
+            if (/grammar|reference words|adjective pattern|comparative|purpose|fixed expression|opinion phrase|concession|hedging|question phrase|signpost|meeting expression|time expression|polite disagreement|polite request|linker|conditional clause/i.test(label)) return 'form';
             return 'm';
         }
-        // Recursively render a text range, nesting any spans that fall fully inside a larger
-        // span as an inner <mark> so two (or more) colors can show at once, e.g. a contraction
-        // color nested inside a wider communicative-function color.
+        function wordify(value) {
+            return esc(value).replace(/(\S+)/g, function(token) {
+                return '<span class="word" data-word="' + token + '">' + token + '</span>';
+            });
+        }
+        // Recursively render a text range, nesting overlapping language highlights.
         function renderRange(text, rangeStart, rangeEnd, candidates) {
             var within = candidates.filter(function(sp) { return sp.s >= rangeStart && sp.e <= rangeEnd; });
             var top = within.filter(function(sp) {
@@ -1556,12 +1884,13 @@
             top.sort(function(a, b) { return a.s - b.s; });
             var out = '', pos = rangeStart;
             top.forEach(function(sp) {
-                out += esc(text.substring(pos, sp.s));
+                out += wordify(text.substring(pos, sp.s));
                 var inner = renderRange(text, sp.s, sp.e, candidates.filter(function(c) { return c !== sp; }));
-                out += '<mark class="lang-hl ' + colorOf(sp.l) + '" title="' + esc(sp.l) + '">' + inner + '</mark>';
+                var markerNumber = ++languageTagNumber;
+                out += '<mark class="lang-hl ' + colorOf(sp.l) + '">' + inner + '<button type="button" class="explain-marker" data-explanation="' + esc(sp.explanation) + '" aria-label="Show explanation ' + markerNumber + '">' + markerNumber + '</button></mark>';
                 pos = sp.e;
             });
-            out += esc(text.substring(pos, rangeEnd));
+            out += wordify(text.substring(pos, rangeEnd));
             return out;
         }
         var html = '<table class="dialogue-table"><thead><tr>'
@@ -1569,28 +1898,29 @@
             + '</tr></thead><tbody>';
         DIALOGUE.forEach(function(ut) {
             var text = ut.t, spans = [];
+            function addSpan(start, end, label) {
+                var explanation = label;
+                if (/^yellow$/i.test(label)) explanation = ut.fn ? 'Communicative purpose — ' + ut.fn.replace(/\n/g, ' · ') : 'Meeting language — acknowledges a point or helps organise the discussion.';
+                else if (/^meeting procedures$/i.test(label)) explanation = ut.fn ? 'Meeting procedure — ' + ut.fn.replace(/\n/g, ' · ') : 'Meeting language — helps organise the discussion.';
+                var existing = spans.find(function(sp) { return sp.s === start && sp.e === end; });
+                if (existing) {
+                    if (existing.explanation.indexOf(explanation) < 0) existing.explanation += ' ' + explanation;
+                } else {
+                    spans.push({ s: start, e: end, l: label, explanation: explanation });
+                }
+            }
             (ut.hi || []).forEach(function(h) {
                 var idx = text.indexOf(h.m);
                 if (idx < 0) return;
                 if (h.hl) {
                     var subIdx = h.m.indexOf(h.hl);
-                    if (subIdx >= 0) { spans.push({ s: idx + subIdx, e: idx + subIdx + h.hl.length, l: h.l }); return; }
+                    if (subIdx >= 0) { addSpan(idx + subIdx, idx + subIdx + h.hl.length, h.l); return; }
                 }
-                spans.push({ s: idx, e: idx + h.m.length, l: h.l });
+                addSpan(idx, idx + h.m.length, h.l);
             });
             var hl = renderRange(text, 0, text.length, spans);
-            var exps = [];
-            (ut.hi || []).forEach(function(h) {
-                if (h.hide) return;
-                if (h.plain) {
-                    exps.push('<span class="exp-plain">' + esc(h.l) + '</span>');
-                } else {
-                    exps.push('<span class="exp-item ' + colorOf(h.l) + '">' + esc(h.l) + '</span>');
-                }
-            });
             var fnLabel = ut.fn ? '<div class="fn-label">' + esc(ut.fn) + '</div>' : '';
-            var expHtml = exps.length ? exps.join(' ') : '<span class="muted">&mdash;</span>';
-            var fnCell = fnLabel + (exps.length ? expHtml : '');
+            var fnCell = fnLabel || '<span class="muted">&mdash;</span>';
             var role = ut.sp === 'All' ? 'ALL' : ut.sp;
             var btn = '<button class="speaker-btn role-' + role + '" onclick="play(\'' + ut.f + '\', this)" title="Play">'
                 + role + '<div class="audio-pulse"></div></button>';
@@ -1617,8 +1947,19 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         renderDialogue();
+        initLanguageTooltips();
+        initWordPronunciation();
         initTranslations();
     });
+
+    /* Keep the active tab button in view when the tab bar scrolls sideways on phones */
+    (function () {
+        const orig = window.switchTab;
+        window.switchTab = function (name, btn) {
+            orig(name, btn);
+            if (btn && btn.scrollIntoView) btn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        };
+    })();
 </script>
 </body>
 </html>
