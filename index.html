@@ -1284,6 +1284,10 @@ body { overflow: hidden; }
 .user-guide > strong { display: block; font-size: 16px; margin-bottom: 6px; }
 .user-guide ul { margin: 0 0 0 20px; padding: 0; }
 .user-guide li { margin: 4px 0; line-height: 1.6; }
+
+.user-guide h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: #31583a; margin: 0 0 10px; text-align: center; }
+.user-guide { font-size: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+.user-guide li { margin: 7px 0; }
 </style>
 </head>
 <body>
@@ -1300,7 +1304,15 @@ body { overflow: hidden; }
           <h1>EAII Practice 2:<br><span>Earthwise Action</span></h1>
         </div>
         <div class="presenter-tag">Presented by Rebecca Tang</div>
-        <div class="tab2-guide user-guide"><strong>User Guide</strong>
+        <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(1)">Start ▶</button></div>
+      </div>
+    </section>
+
+
+    <!-- 2 · User guide -->
+    <section class="slide" data-title="User guide" data-nomic="1">
+      <div class="slide-inner">
+        <div class="tab2-guide user-guide"><h2>User Guide</h2>
           <ul>
             <li><strong>Navigate:</strong> use ◀ ▶ (or the arrow keys, or swipe) to move between slides, or pick a slide from the menu.</li>
             <li><strong>Listen:</strong> choose <em>Play All</em> or a speaker button to listen to the discussion.</li>
@@ -1309,13 +1321,13 @@ body { overflow: hidden; }
             <li><strong>Pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
             <li><strong>Functions:</strong> read the communicative function shown above each line of the conversation.</li>
             <li><strong>Translation:</strong> switch on <em>中文翻译</em> to show the Chinese translations.</li>
-            <li><strong>Speaking practice (slides 5–18):</strong> tap a line to select it, press the 🎤 button, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear afterwards (best in Chrome, Edge or Safari).</li>
+            <li><strong>Speaking practice (slides 6–19):</strong> tap a line to select it, press the 🎤 button, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear afterwards (best in Chrome, Edge or Safari).</li>
           </ul></div>
-        <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(1)">Start ▶</button></div>
+        <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(2)">Next ▶</button></div>
       </div>
     </section>
 
-    <!-- 2 · Task -->
+    <!-- 3 · Task -->
     <section class="slide" data-title="Task" data-practice="You are on the public relations team of Earthwise Action.">
       <div class="slide-inner">
         <div class="task-section">
@@ -2337,7 +2349,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initTranslations();
     initLanguageTooltips();
     initWordPronunciation();
-    slides.forEach((s, i) => { if (!s.dataset.nomic && i >= 4 && i <= 17) makePanel(s); });   // microphone on slides 5-18 only
+    slides.forEach((s, i) => { if (!s.dataset.nomic && i >= 5 && i <= 18) makePanel(s); });   // microphone on slides 6-19 only
     document.getElementById('slides').addEventListener('click', e => {
         const row = e.target.closest('.script-row');
         if (row) selectTarget(row);
