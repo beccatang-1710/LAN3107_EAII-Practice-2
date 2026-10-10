@@ -1272,9 +1272,6 @@ body { overflow: hidden; }
 /* ===== Responsive scaling: content grows with the window, short slides are centred ===== */
 .deck { --z: 1; }
 .slide-inner { zoom: var(--z); width: 100%; margin: auto; flex: none; padding-top: 20px; padding-bottom: 28px; }
-.mic-panel { zoom: var(--z); flex: none; width: 100%; max-width: 980px; margin: 0 auto 8px; position: sticky; bottom: 6px; }
-@media (min-width: 1500px) { .mic-panel { max-width: 1100px; } }
-@media (max-width: 900px) { .mic-panel { max-width: none; width: calc(100% - 24px); } }
 .slide-inner .task-section, .slide-inner .summary-card { margin-left: auto; margin-right: auto; }
 
 .toolbar { zoom: calc(1 + (var(--z) - 1) * 0.5); }
@@ -1288,6 +1285,33 @@ body { overflow: hidden; }
 .user-guide h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: #31583a; margin: 0 0 10px; text-align: center; }
 .user-guide { font-size: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
 .user-guide li { margin: 7px 0; }
+
+/* ===== Pop-up microphone window ===== */
+.mic-fab {
+  position: absolute; right: 18px; bottom: 18px; z-index: 6; width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+  font-size: 28px; color: #fff; background: linear-gradient(135deg, #7a9e7e, #3d8a4f); box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  transition: transform .15s; zoom: calc(1 + (var(--z) - 1) * 0.5);
+}
+.mic-fab:hover { transform: scale(1.08); }
+.mic-fab[hidden] { display: none; }
+.mic-modal { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 14px; }
+.mic-modal[hidden] { display: none; }
+.mic-backdrop { position: absolute; inset: 0; background: rgba(20,35,25,.5); backdrop-filter: blur(2px); }
+.mic-panel {
+  position: relative; zoom: calc(1 + (var(--z) - 1) * 0.6); width: min(100%, 680px); max-height: 92vh; overflow-y: auto;
+  margin: 0; padding: 18px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--divider);
+  box-shadow: 0 18px 50px rgba(0,0,0,.35); animation: popIn .22s ease both;
+}
+@keyframes popIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.mic-close { position: absolute; top: 8px; right: 12px; border: none; background: none; font-size: 30px; line-height: 1; color: #6b6b6b; cursor: pointer; }
+.mic-close:hover { color: #c0392b; }
+.mic-lines { display: flex; align-items: center; gap: 8px; margin: 0 34px 12px 0; flex-wrap: wrap; }
+.mic-step { width: 32px; height: 30px; border: none; border-radius: 8px; background: #1a4a2e; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; }
+.mic-step:disabled { opacity: .3; cursor: default; }
+.mic-linecount { font-size: 13px; font-weight: 600; color: var(--earth); }
+.mic-listen { margin-left: auto; border: 1px solid var(--divider); background: var(--sage-pale); color: var(--earth); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.mic-listen:hover { background: #dfeadf; }
+@media (max-width: 640px) { .mic-fab { width: 54px; height: 54px; font-size: 25px; right: 12px; bottom: 12px; } }
 </style>
 </head>
 <body>
@@ -1321,7 +1345,7 @@ body { overflow: hidden; }
             <li><strong>Pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
             <li><strong>Functions:</strong> read the communicative function shown above each line of the conversation.</li>
             <li><strong>Translation:</strong> switch on <em>中文翻译</em> to show the Chinese translations.</li>
-            <li><strong>Speaking practice (slides 6–19):</strong> tap a line to select it, press the 🎤 button, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear afterwards (best in Chrome, Edge or Safari).</li>
+            <li><strong>Speaking practice (slides 6–19):</strong> tap the floating 🎤 button (bottom right) to open the practice window, choose a line with ‹ ›, press the 🎤 button inside, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear in the window (best in Chrome, Edge or Safari).</li>
           </ul></div>
         <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(2)">Next ▶</button></div>
       </div>
@@ -1885,6 +1909,7 @@ function goTo(i, keepAudio) {
     slides[cur].classList.add('active');
     slides[cur].scrollTop = 0;
     document.getElementById('languageTooltip').hidden = true;
+    if (micModal) { closeMic(); micFab.hidden = !slides[cur].dataset.mic; }
     document.getElementById('jump').value = String(cur);
     document.getElementById('prevBtn').disabled = cur === 0;
     document.getElementById('nextBtn').disabled = cur === slides.length - 1;
@@ -1904,6 +1929,7 @@ function initNav() {
     document.getElementById('nextBtn').addEventListener('click', () => goTo(cur + 1));
     document.addEventListener('keydown', e => {
         if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+        if (micOpen()) return;
         if (e.key === 'ArrowRight' || e.key === 'PageDown') goTo(cur + 1);
         else if (e.key === 'ArrowLeft' || e.key === 'PageUp') goTo(cur - 1);
         else if (e.key === 'Home') goTo(0);
@@ -1998,7 +2024,9 @@ function speakHoveredWord(wordEl) {
 }
 
 function initWordPronunciation() {
-    const root = document.getElementById('slides');
+    [document.getElementById('slides'), micModal].forEach(bindWordPronunciation);
+}
+function bindWordPronunciation(root) {
     root.addEventListener('pointerover', event => {
         if (event.pointerType === 'touch') return;
         const word = event.target.closest('.word');
@@ -2211,33 +2239,81 @@ function targetTextOf(slide) {
     return slide.dataset.practice || '';
 }
 
-function makePanel(slide) {
-    const p = document.createElement('div');
-    p.className = 'mic-panel';
-    p.innerHTML = '<div class="mic-top"><button type="button" class="mic-btn" aria-label="Record your pronunciation" title="Record">🎤</button>'
+/* Pop-up pronunciation window: one floating 🎤 button per mic slide opens a modal */
+let micFab = null, micModal = null, micPanel = null;
+
+function makeMicUI() {
+    micFab = document.createElement('button');
+    micFab.type = 'button'; micFab.className = 'mic-fab'; micFab.hidden = true;
+    micFab.title = 'Practise your pronunciation'; micFab.setAttribute('aria-label', 'Open pronunciation practice');
+    micFab.textContent = '🎤';
+    document.getElementById('slides').appendChild(micFab);
+
+    micModal = document.createElement('div');
+    micModal.className = 'mic-modal'; micModal.hidden = true;
+    micModal.innerHTML = '<div class="mic-backdrop"></div>'
+        + '<div class="mic-panel" role="dialog" aria-modal="true" aria-label="Pronunciation practice">'
+        + '<button type="button" class="mic-close" aria-label="Close">×</button>'
+        + '<div class="mic-lines"><button type="button" class="mic-step mic-prev" aria-label="Previous line">‹</button>'
+        + '<span class="mic-linecount"></span><button type="button" class="mic-step mic-next" aria-label="Next line">›</button>'
+        + '<button type="button" class="mic-listen">🔊 Listen</button></div>'
+        + '<div class="mic-top"><button type="button" class="mic-btn" aria-label="Record your pronunciation" title="Record">🎤</button>'
         + '<div class="mic-target"><span class="mic-label">Say this</span><span class="mic-target-text"></span></div></div>'
         + '<div class="mic-status"></div>'
         + '<div class="mic-result" hidden><div class="score-row"><div class="score-ring"><span></span></div>'
         + '<div class="score-meta"><strong></strong><small></small></div></div>'
         + '<div class="word-feedback"></div><ul class="mic-tips"></ul>'
-        + '<div class="mic-note">Feedback comes from your browser’s speech recognition, so it shows how clearly each word was understood.</div></div>';
-    slide.appendChild(p);
-    p.querySelector('.mic-btn').addEventListener('click', () => toggleMic(slide, p));
-    refreshPanel(slide);
+        + '<div class="mic-note">Feedback comes from your browser’s speech recognition, so it shows how clearly each word was understood.</div></div></div>';
+    document.getElementById('deck').appendChild(micModal);
+    micPanel = micModal.querySelector('.mic-panel');
+
+    micFab.addEventListener('click', openMic);
+    micModal.querySelector('.mic-backdrop').addEventListener('click', closeMic);
+    micModal.querySelector('.mic-close').addEventListener('click', closeMic);
+    micPanel.querySelector('.mic-btn').addEventListener('click', () => toggleMic(slides[cur], micPanel));
+    micPanel.querySelector('.mic-prev').addEventListener('click', () => stepLine(-1));
+    micPanel.querySelector('.mic-next').addEventListener('click', () => stepLine(1));
+    micPanel.querySelector('.mic-listen').addEventListener('click', () => {
+        const row = slides[cur].querySelector('.script-row.target');
+        const btn = row && row.querySelector('.speaker-btn');
+        if (btn) { stopPlay(); startClip(btn); }
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !micModal.hidden) closeMic(); });
+}
+function micOpen() { return micModal && !micModal.hidden; }
+function openMic() {
+    stopPlay();
+    micModal.hidden = false;
+    refreshPanel(slides[cur]);
+    micPanel.querySelector('.mic-btn').focus();
+}
+function closeMic() {
+    stopMic();
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (micModal) micModal.hidden = true;
+}
+function stepLine(d) {
+    const rows = [...slides[cur].querySelectorAll('.script-row')];
+    const i = rows.findIndex(r => r.classList.contains('target'));
+    const n = Math.max(0, Math.min(rows.length - 1, (i < 0 ? 0 : i) + d));
+    if (rows[n]) { selectTarget(rows[n], true); rows[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 }
 function refreshPanel(slide) {
-    const p = slide.querySelector('.mic-panel');
-    if (!p) return;
-    p.querySelector('.mic-target-text').textContent = targetTextOf(slide);
-    p.querySelector('.mic-status').textContent = slide.dataset.dialogue
-        ? 'Tap a line to choose it (or play it), then press the mic and read it aloud.'
-        : 'Press the mic and read the sentence aloud.';
-    p.querySelector('.mic-result').hidden = true;
+    if (!micPanel || slide !== slides[cur]) return;
+    const rows = [...slide.querySelectorAll('.script-row')];
+    const i = rows.findIndex(r => r.classList.contains('target'));
+    micPanel.querySelector('.mic-lines').style.display = rows.length ? '' : 'none';
+    micPanel.querySelector('.mic-linecount').textContent = rows.length ? 'Line ' + (Math.max(i, 0) + 1) + ' of ' + rows.length : '';
+    micPanel.querySelector('.mic-prev').disabled = i <= 0;
+    micPanel.querySelector('.mic-next').disabled = i >= rows.length - 1;
+    micPanel.querySelector('.mic-target-text').textContent = targetTextOf(slide);
+    micPanel.querySelector('.mic-status').textContent = 'Press the mic and read the sentence aloud.';
+    micPanel.querySelector('.mic-result').hidden = true;
 }
-function selectTarget(row) {
+function selectTarget(row, force) {
     const slide = row.closest('.slide');
     if (!slide) return;
-    if (row.classList.contains('target')) return;
+    if (row.classList.contains('target') && !force) return;
     slide.querySelectorAll('.script-row.target').forEach(r => r.classList.remove('target'));
     row.classList.add('target');
     if (MIC.listening) stopMic();
@@ -2348,13 +2424,14 @@ document.addEventListener('DOMContentLoaded', function () {
     wordifyStatic();
     initTranslations();
     initLanguageTooltips();
+    slides.forEach((s, i) => { if (!s.dataset.nomic && i >= 5 && i <= 18) s.dataset.mic = '1'; });   // microphone on slides 6-19 only
+    makeMicUI();
     initWordPronunciation();
-    slides.forEach((s, i) => { if (!s.dataset.nomic && i >= 5 && i <= 18) makePanel(s); });   // microphone on slides 6-19 only
     document.getElementById('slides').addEventListener('click', e => {
         const row = e.target.closest('.script-row');
         if (row) selectTarget(row);
     });
-    slides.forEach(s => { const r = s.querySelector('.script-row'); if (r) r.classList.add('target'); refreshPanel(s); });
+    slides.forEach(s => { const r = s.querySelector('.script-row'); if (r) r.classList.add('target'); });
     slides.forEach(s => s.querySelectorAll('video').forEach(v => v.addEventListener('play', () => { stopPlay(); stopMic(); })));
     applyScale();
     initNav();
