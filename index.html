@@ -1279,6 +1279,11 @@ body { overflow: hidden; }
 
 .toolbar { zoom: calc(1 + (var(--z) - 1) * 0.5); }
 .deck .now-playing { zoom: calc(1 + (var(--z) - 1) * 0.5); }
+
+.user-guide { font-size: 14px; }
+.user-guide > strong { display: block; font-size: 16px; margin-bottom: 6px; }
+.user-guide ul { margin: 0 0 0 20px; padding: 0; }
+.user-guide li { margin: 4px 0; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -1295,7 +1300,17 @@ body { overflow: hidden; }
           <h1>EAII Practice 2:<br><span>Earthwise Action</span></h1>
         </div>
         <div class="presenter-tag">Presented by Rebecca Tang</div>
-        <div class="tab2-guide"><strong>How to use Tab 2 (Possible Response):</strong> Choose <em>Play All</em> or a speaker button to listen to the discussion; use <em>Pause</em>, <em>Stop</em> and the <em>Speed</em> control to control the playback. Hover over a numbered marker for its language explanation, or tap on the marker. Hover over a word to hear its pronunciation; tap a word on a touch screen. Review communicative functions above the conversation, and switch on <em>中文翻译</em> to show the translations.</div>
+        <div class="tab2-guide user-guide"><strong>User Guide</strong>
+          <ul>
+            <li><strong>Navigate:</strong> use ◀ ▶ (or the arrow keys, or swipe) to move between slides, or pick a slide from the menu.</li>
+            <li><strong>Listen:</strong> choose <em>Play All</em> or a speaker button to listen to the discussion.</li>
+            <li><strong>Playback:</strong> use <em>Pause</em>, <em>Stop</em> and the <em>Speed</em> menu to adjust playback.</li>
+            <li><strong>Language notes:</strong> hover over (or tap) a numbered marker for its language explanation.</li>
+            <li><strong>Pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
+            <li><strong>Functions:</strong> read the communicative function shown above each line of the conversation.</li>
+            <li><strong>Translation:</strong> switch on <em>中文翻译</em> to show the Chinese translations.</li>
+            <li><strong>Speaking practice (slides 5–18):</strong> tap a line to select it, press the 🎤 button, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear afterwards (best in Chrome, Edge or Safari).</li>
+          </ul></div>
         <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(1)">Start ▶</button></div>
       </div>
     </section>
