@@ -1314,6 +1314,11 @@ body { overflow: hidden; }
 .mic-listen { margin-left: auto; border: 1px solid var(--divider); background: var(--sage-pale); color: var(--earth); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .mic-listen:hover { background: #dfeadf; }
 @media (max-width: 640px) { .mic-fab { width: 54px; height: 54px; font-size: 25px; right: 12px; bottom: 12px; } }
+
+/* Pronunciation tracer: highlight the word being read, shade the words already read */
+.slide .script-text .word.active { font-weight: inherit; color: #1b3a2a; background: #ffe680; border-radius: 4px; box-shadow: 0 0 0 2px #ffe680; }
+.slide .script-text .word.active::after { display: none; }
+.slide .script-text .word.read { color: #6f8a77; }
 </style>
 </head>
 <body>
@@ -1345,7 +1350,8 @@ body { overflow: hidden; }
             <li data-cn="收听：选择「播放全部」或喇叭按钮，收听讨论内容。"><strong>Listen:</strong> choose <em>Play All</em> or a speaker button to listen to the discussion.</li>
             <li data-cn="播放控制：使用「暂停」「停止」及「速度」菜单调整播放。"><strong>Playback:</strong> use <em>Pause</em>, <em>Stop</em> and the <em>Speed</em> menu to adjust playback.</li>
             <li data-cn="语言注释：将鼠标移到（或轻按）编号标记，查看语言说明。"><strong>Language notes:</strong> hover over (or tap) a numbered marker for its language explanation.</li>
-            <li data-cn="发音：将鼠标移到单词上即可听到发音；触屏设备请轻按单词。"><strong>Pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
+            <li data-cn="单词发音：将鼠标移到单词上即可听到发音；触屏设备请轻按单词。"><strong>Word pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
+            <li data-cn="发音追踪：播放对话（「播放全部」或喇叭按钮）时，正在朗读的单词会以黄色高亮显示，已读过的单词会变淡，方便你一边听一边跟读。高亮根据音频长度估算，可能略有偏差。"><strong>Pronunciation tracer:</strong> while a line is read aloud (with <em>Play All</em> or a speaker button), the word being spoken is highlighted in yellow and the words already read are shaded, so you can follow the pronunciation word by word. The highlight is timed from the clip length, so it may be slightly off.</li>
             <li data-cn="沟通功能：留意对话中每一句上方显示的沟通功能。"><strong>Functions:</strong> read the communicative function shown above each line of the conversation.</li>
             <li data-cn="翻译：打开底部工具栏的「中文翻译」开关，即可显示中文翻译（包括本使用指南）。"><strong>Translation:</strong> switch on <em>中文翻译</em> to show the Chinese translations.</li>
             <li data-cn="口语练习（第6至19张幻灯片）：轻按右下角浮动的 🎤 按钮打开练习窗口，用 ‹ › 选择句子，按窗口内的 🎤 按钮，在提示时允许使用麦克风，然后朗读该句。窗口会显示你的准确度分数及逐词反馈（建议使用 Chrome、Edge 或 Safari）。"><strong>Speaking practice (slides 6–19):</strong> tap the floating 🎤 button (bottom right) to open the practice window, choose a line with ‹ ›, press the 🎤 button inside, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear in the window (best in Chrome, Edge or Safari).</li>
@@ -2350,35 +2356,58 @@ function setSpeed(val) {
     if (currentAudio) currentAudio.playbackRate = speed;
 }
 
-/* ---------- Pronunciation tracer (word highlighting follows audio) ---------- */
+/* ---------- Pronunciation tracer (word highlighting follows the audio) ---------- */
+// Timing is estimated from syllables and pauses at punctuation, then synced to the clip's real progress.
+function wordTraceWeight(token) {
+    const w = token.toLowerCase().replace(/[^a-z]/g, '');
+    let syl = 1;
+    if (w) {
+        const m = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').replace(/^y/, '').match(/[aeiouy]{1,2}/g);
+        syl = Math.max(1, m ? m.length : 1);
+    }
+    let weight = syl * 3 + 1;
+    if (/[.?!]["')\]]?$/.test(token)) weight += 4;
+    else if (/[,;:\u2014]["')\]]?$/.test(token)) weight += 2;
+    return weight;
+}
+let wordTraceRaf = 0;
 function startWordTrack(btn, audio) {
+    cancelAnimationFrame(wordTraceRaf);
     const row = btn.closest('.script-row');
     if (!row) return;
     const textEl = row.querySelector('.script-text');
     if (!textEl) return;
     const words = Array.from(textEl.querySelectorAll('.word'));
     if (!words.length) return;
-    const weights = words.map(w => w.textContent.length + 2);
-    const total = weights.reduce((a, b) => a + b, 0);
+    const weights = words.map(w => wordTraceWeight(w.textContent));
+    const total = weights.reduce((x, y) => x + y, 0);
     const cum = []; let run = 0;
     weights.forEach(w => { run += w; cum.push(run / total); });
     let lastIdx = -1;
-    const handler = () => {
+    const paint = () => {
         const dur = audio.duration;
-        if (!dur || isNaN(dur)) return;
-        const pct = audio.currentTime / dur;
-        let idx = cum.findIndex(c => pct <= c);
-        if (idx < 0) idx = words.length - 1;
-        if (idx !== lastIdx) {
-            if (lastIdx >= 0) words[lastIdx].classList.remove('active');
-            words[idx].classList.add('active');
-            lastIdx = idx;
+        if (dur && isFinite(dur)) {
+            const pct = Math.min(1, audio.currentTime / dur);
+            let idx = cum.findIndex(c => pct <= c);
+            if (idx < 0) idx = words.length - 1;
+            if (idx !== lastIdx) {
+                words.forEach((w, i) => { w.classList.toggle('active', i === idx); w.classList.toggle('read', i < idx); });
+                lastIdx = idx;
+            }
         }
+        if (!audio.paused && !audio.ended) wordTraceRaf = requestAnimationFrame(paint);
     };
-    audio.addEventListener('timeupdate', handler);
-    audio.addEventListener('ended', () => audio.removeEventListener('timeupdate', handler), { once: true });
+    const kick = () => { cancelAnimationFrame(wordTraceRaf); wordTraceRaf = requestAnimationFrame(paint); };
+    audio.addEventListener('play', kick);
+    audio.addEventListener('playing', kick);
+    audio.addEventListener('seeked', paint);
+    audio.addEventListener('loadedmetadata', paint);
+    audio.addEventListener('ended', () => cancelAnimationFrame(wordTraceRaf), { once: true });
 }
-function clearWordTrack() { document.querySelectorAll('.script-text .word.active').forEach(w => w.classList.remove('active')); }
+function clearWordTrack() {
+    cancelAnimationFrame(wordTraceRaf);
+    document.querySelectorAll('.script-text .word.active, .script-text .word.read').forEach(w => w.classList.remove('active', 'read'));
+}
 
 function setNowPlaying(btn) {
     const row = btn.closest('.script-row');
